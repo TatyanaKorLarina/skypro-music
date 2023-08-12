@@ -1,6 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 
+import Playlist from '../playlist/Playlist.js';
 const Sidebar = () => {
   return (
     <div className="main__sidebar sidebar">
@@ -14,33 +15,16 @@ const Sidebar = () => {
             </div>
             <div className="sidebar__block">
               <div className="sidebar__list">
-                <div className="sidebar__item">
-                  <a className="sidebar__link" href="#">
-                    <img
-                      className="sidebar__img"
-                      src="img/playlist01.png"
-                      alt="day's playlist"
-                    />
-                  </a>
-                </div>
-                <div className="sidebar__item">
-                  <a className="sidebar__link" href="#">
-                    <img
-                      className="sidebar__img"
-                      src="img/playlist02.png"
-                      alt="day's playlist"
-                    />
-                  </a>
-                </div>
-                <div className="sidebar__item">
-                  <a className="sidebar__link" href="#">
-                    <img
-                      className="sidebar__img"
-                      src="img/playlist03.png"
-                      alt="day's playlist"
-                    />
-                  </a>
-                </div>
+              <Playlist
+        imgUrl="img/playlist01.png"
+        
+      />
+      <Playlist
+        imgUrl="img/playlist02.png"
+      />
+      <Playlist
+        imgUrl="img/playlist03.png"
+      />
               </div>
             </div>
           </div>
