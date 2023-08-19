@@ -254,6 +254,7 @@ body {
   letter-spacing: 2px;
   color: #696969;
   text-transform: uppercase;
+  padding-left: 40px;
 }
 
 .playlist-title__svg {
@@ -278,7 +279,7 @@ body {
   align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  
   margin-bottom: 24px;
 }
 
@@ -302,6 +303,7 @@ body {
 
 .col02 {
   width: 321px;
+  padding-left: -40px;
 }
 
 .col03 {
