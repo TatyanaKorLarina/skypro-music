@@ -27,7 +27,8 @@ function App() {
 
   if (isLoading) {
     return (
-        // Отображение скелетонов во время загрузки
+       
+      
         <div className="App">
           <div className="wrapper">
             <div className="container">
@@ -45,13 +46,13 @@ function App() {
                       name="search"
                     />
                     <div className="sidebar__personal">
-              <p className="sidebar__personal-name">Sergey.Ivanov</p>
-              <div className="sidebar__icon">
-                <svg className="logout" alt="logout">
-                  <use xlinkHref="img/icon/sprite.svg#logout" />
-                </svg>
-              </div>
-            </div>
+                      <div className="sidebar__personal-name">Sergey.Ivanov</div>
+                      <div className="sidebar__icon">
+                        <svg className="logout" alt="logout">
+                          <use xlinkHref="img/icon/sprite.svg#logout" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                   <h2 className="centerblock__h2">Треки</h2>
                   <Filter />
@@ -80,7 +81,7 @@ function App() {
     );
   }
   
-    // Показывает главную страницу "Треки" после загрузки
+  
   return ( 
     <div className="App">
     <div className="wrapper">
