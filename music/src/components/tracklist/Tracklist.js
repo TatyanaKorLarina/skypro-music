@@ -1,14 +1,14 @@
-import React from 'react';
-import './Tracklist.css';
-import Track from '../track/Track.js';
-import Filter from '../filter/Filter.js';
 
-const Tracklist = () => {
+import './Tracklist.css';
+import Track from '../track/Track';
+import Filter from '../filter/Filter';
+
+function Tracklist() {
   return (
     <div className="main__centerblock centerblock">
     <div className="centerblock__search search">
       <svg className="search__svg">
-        <use xlinkHref="img/icon/sprite.svg#icon-search"></use>
+        <use xlinkHref="img/icon/sprite.svg#icon-search" />
       </svg>
       <input
         className="search__text"
@@ -26,7 +26,7 @@ const Tracklist = () => {
         <div className="playlist-title__col col03">АЛЬБОМ</div>
         <div className="playlist-title__col col04">
           <svg className="playlist-title__svg" alt="time">
-            <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
+            <use xlinkHref="img/icon/sprite.svg#icon-watch" />
           </svg>
         </div>
       </div>
@@ -101,26 +101,27 @@ const Tracklist = () => {
             <div className="track__title">
               <div className="track__title-image">
                 <svg className="track__title-svg" alt="music">
-                  <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                  <use xlinkHref="img/icon/sprite.svg#icon-note" />
                 </svg>
               </div>
               <div className="track__title-text">
-                <a className="track__title-link" href="http://">
-                  <span className="track__title-span"></span
-                ></a>
+                <a className="track__title-link" href="http://" >
+                  <span className="track__title-span" /></a>
               </div>
             </div>
             <div className="track__author">
-              <a className="track__author-link" href="http://"></a>
+            <a className="track__author-link" href="http://" >
+                  <span className="track__author-span" /></a>
             </div>
             <div className="track__album">
-              <a className="track__album-link" href="http://"></a>
+            <a className="track__album-link" href="http://" >
+                  <span className="track__album-span" /></a>
             </div>
             <div className="track__time">
               <svg className="track__time-svg" alt="time">
-                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                <use xlinkHref="img/icon/sprite.svg#icon-like" />
               </svg>
-              <span className="track__time-text"></span>
+              <span className="track__time-text" />
             </div>
           </div>
         
@@ -128,6 +129,6 @@ const Tracklist = () => {
     </div>
   </div>
   );
-};
+}
 
 export default Tracklist;

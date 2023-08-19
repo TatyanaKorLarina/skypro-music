@@ -1,10 +1,10 @@
-import React from 'react';
+
 import './Playlist.css';
 
-const Playlist = (props) => {
+function Playlist(props) {
   return (
     <div className="sidebar__item">
-                  <a className="sidebar__link" href="#">
+                  <a className="sidebar__link" href="../index.html">
                     <img
                       className="sidebar__img"
                       src={props.imgUrl}
@@ -13,6 +13,6 @@ const Playlist = (props) => {
                   </a>
                 </div>
   );
-};
+}
 
 export default Playlist;

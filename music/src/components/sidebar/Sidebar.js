@@ -1,15 +1,16 @@
-import React from 'react';
+
 import './Sidebar.css';
 
-import Playlist from '../playlist/Playlist.js';
-const Sidebar = () => {
+import Playlist from '../playlist/Playlist';
+
+function Sidebar() {
   return (
     <div className="main__sidebar sidebar">
             <div className="sidebar__personal">
               <p className="sidebar__personal-name">Sergey.Ivanov</p>
               <div className="sidebar__icon">
                 <svg alt="logout">
-                  <use xlinkHref="img/icon/sprite.svg#logout"></use>
+                  <use xlinkHref="img/icon/sprite.svg#logout" />
                 </svg>
               </div>
             </div>
@@ -29,6 +30,6 @@ const Sidebar = () => {
             </div>
           </div>
   );
-};
+}
 
 export default Sidebar;

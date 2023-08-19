@@ -1,7 +1,7 @@
-import React from 'react';
+
 import './Filter.css';
 
-const Filter = () => {
+function Filter() {
   return (
     <div className="centerblock__filter filter">
       <div className="filter__title">Искать по:</div>
@@ -14,6 +14,6 @@ const Filter = () => {
       <div className="filter__button button-genre _btn-text">жанру</div>
     </div>
   );
-};
+}
 
 export default Filter;

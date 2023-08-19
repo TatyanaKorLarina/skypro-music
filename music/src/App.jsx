@@ -1,8 +1,8 @@
-import React from 'react';
-import AudioPlayer from './components/audioPlayer/AudioPlayer.js';
-import NavMenu from './components/navMenu/NavMenu.js';
-import Tracklist from './components/tracklist/Tracklist.js';
-import Sidebar from './components/sidebar/Sidebar.js';
+
+import AudioPlayer from './components/audioPlayer/AudioPlayer';
+import NavMenu from './components/navMenu/NavMenu';
+import Tracklist from './components/tracklist/Tracklist';
+import Sidebar from './components/sidebar/Sidebar';
 import './App.css';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Sidebar />
         </main>
         <AudioPlayer />
-        <footer className="footer"></footer>
+        <footer className="footer" />
       </div>
     </div>
     </div>
