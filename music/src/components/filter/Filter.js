@@ -32,44 +32,44 @@ function Filter() {
       </switch>
       {activeFilter === 'filter__button button-author _btn-text' && (
         <ul className='pop-up-author'>
-          <li>Nero</li>
-          <li>Dynoro</li>
-          <li>Outwork</li>
-          <li>Mr. Gee</li>
-          <li>Ali Bakgor</li>
-          <li>Стоункат</li>
-          <li>Psychopath</li>
-          <li>Jaded</li>
-          <li>Will Clarke</li>
-          <li>AR/CO</li>
-          <li>Blue Foundation</li>
-          <li>Zeds Dead</li>
-          <li>HYBIT</li>
-          <li>Mr. Black</li>
-          <li>Offer Nissim</li>
-          <li>Hi Profile</li>
-          <li>minthaze</li>
-          <li>Calvin Harris</li>
-          <li>Disciples</li>
-          <li>Tom Boxer</li>
+          <li className="item">Nero</li>
+          <li className="item">Dynoro</li>
+          <li className="item">Outwork</li>
+          <li className="item">Mr. Gee</li>
+          <li className="item">Ali Bakgor</li>
+          <li className="item">Стоункат</li>
+          <li className="item">Psychopath</li>
+          <li className="item">Jaded</li>
+          <li className="item">Will Clarke</li>
+          <li className="item">AR/CO</li>
+          <li className="item">Blue Foundation</li>
+          <li className="item">Zeds Dead</li>
+          <li className="item">HYBIT</li>
+          <li className="item">Mr. Black</li>
+          <li className="item">Offer Nissim</li>
+          <li className="item">Hi Profile</li>
+          <li className="item">minthaze</li>
+          <li className="item">Calvin Harris</li>
+          <li className="item">Disciples</li>
+          <li className="item">Tom Boxer</li>
         </ul>
       )}
       {activeFilter === 'filter__button button-year _btn-text' && (
         <ul className='pop-up-year'>
-          <li>1994</li>
-          <li>1995</li>
-          <li>2000</li>
+          <li className="item">1994</li>
+          <li className="item">1995</li>
+          <li className="item">2000</li>
           
         </ul>
       )}
       {activeFilter === 'filter__button button-genre _btn-text' && (
         <ul className='pop-up-genre'>
-          <li>rock</li>
-          <li>rap</li>
-          <li>hip-hop</li>
-          <li>electronic</li>
-          <li>house</li>
-          <li>techno</li>
+          <li className="item">rock</li>
+          <li className="item">rap</li>
+          <li className="item">hip-hop</li>
+          <li className="item">electronic</li>
+          <li className="item">house</li>
+          <li className="item">techno</li>
           
         </ul>
       )}

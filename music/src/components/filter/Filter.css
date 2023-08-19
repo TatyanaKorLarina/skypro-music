@@ -63,3 +63,8 @@
     width: 221px;
     height: 196px;
   }
+
+  .item:hover {
+    color: violet;
+    text-decoration: underline;
+  }
