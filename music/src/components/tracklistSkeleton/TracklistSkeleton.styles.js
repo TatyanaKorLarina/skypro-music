@@ -1,4 +1,6 @@
-.content__tracklist {
+import  styled  from 'styled-components'
+
+export const ContentTracklist = styled.div`
     margin-left: 400px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8,5 +10,5 @@
     -ms-flex-direction: column;
     flex-direction: column;
     overflow-y: auto;
-  }
-  
+`
+

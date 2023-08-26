@@ -23,12 +23,12 @@ function AudioPlayer() {
                       <use xlinkHref="img/icon/sprite.svg#icon-next" />
                     </S.PlayerBtnNextSvg>
                   </S.PlayerBtnNext>
-                  <S.PlayerBtnRepeat className="_btn-icon">
+                  <S.PlayerBtnRepeat>
                     <S.PlayerBtnRepeatSvg alt="repeat">
                       <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
                     </S.PlayerBtnRepeatSvg>
                   </S.PlayerBtnRepeat>
-                  <S.PlayerBtnShuffle className="_btn-icon">
+                  <S.PlayerBtnShuffle>
                     <S.PlayerBtnShuffleSvg alt="shuffle">
                       <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
                     </S.PlayerBtnShuffleSvg>
@@ -52,12 +52,12 @@ function AudioPlayer() {
                   </S.TrackPlayContain>
 
                   <S.TrackPlayLikeDis>
-                    <S.TrackPlayLike className="_btn-icon">
+                    <S.TrackPlayLike>
                       <S.TrackPlayLikeSvg alt="like">
                         <use xlinkHref="img/icon/sprite.svg#icon-like" />
                       </S.TrackPlayLikeSvg>
                     </S.TrackPlayLike>
-                    <S.TrackPlayDislike className="_btn-icon">
+                    <S.TrackPlayDislike>
                       <S.TrackPlayDislikeSvg alt="dislike">
                         <use
                           xlinkHref="img/icon/sprite.svg#icon-dislike"
@@ -74,9 +74,8 @@ function AudioPlayer() {
                       <use xlinkHref="img/icon/sprite.svg#icon-volume" />
                     </S.VolumeSvg>
                   </S.VolumeImage>
-                  <S.VolumeProgress className="_btn">
+                  <S.VolumeProgress>
                     <S.VolumeProgressLine
-                      className="_btn"
                       type="range"
                       name="range"
                     />
