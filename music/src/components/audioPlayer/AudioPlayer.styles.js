@@ -97,7 +97,7 @@ export const PlayerBtnPlaySvg = styled.svg`
   fill: #d9d9d9;
 ` 
 
-export const dPlayerBtnNext = styled.div`
+export const PlayerBtnNext = styled.div`
   padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
