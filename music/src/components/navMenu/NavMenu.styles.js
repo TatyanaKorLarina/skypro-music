@@ -49,6 +49,7 @@ export const NavMenu = styled.div`
 
 export const MenuList = styled.ul`
   padding: 18px 0 10px 0;
+  list-style: none;
 `
 
 export const MenuItem = styled.li`
@@ -61,4 +62,8 @@ export const MenuLink = styled.a`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline
+  }
 `

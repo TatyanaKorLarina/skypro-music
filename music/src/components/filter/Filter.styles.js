@@ -12,6 +12,7 @@ export const CenterblockFilter = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 51px;
+
 `
 
 export const FilterTitle = styled.div`
@@ -23,6 +24,7 @@ export const FilterTitle = styled.div`
 `
 
 export const FilterButton = styled.div`
+  font-family: StratosSkyeng, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -32,10 +34,19 @@ export const FilterButton = styled.div`
   padding: 6px 20px;
   &:not(:last-child) {
     margin-right: 10px;
+  };
+  cursor: pointer;
+  &:active {
+    background: grey
+  };
+  &:hover {
+    text-decoration: underline
   }
+
 `
 
 export const PopUpAuthor = styled.ul`
+  font-family: StratosSkyeng, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,10 +60,11 @@ export const PopUpAuthor = styled.ul`
   margin-top: 360px;
   margin-left: 90px;
   overflow: scroll;
+  list-style: none;
 `
 
 export const Item = styled.li`
-  font-family: StratosSkyeng;
+  font-family: StratosSkyeng, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
@@ -77,6 +89,10 @@ export const PopUpYear = styled.ul`
   z-index: 1;
   margin-top: 360px;
   margin-left: 290px;
+  list-style: none;
+  background: #313131;
+  border-radius: 12px;
+  font-family: StratosSkyeng, sans-serif;
 `
 
 export const PopUpGenre = styled.ul`
@@ -92,4 +108,6 @@ export const PopUpGenre = styled.ul`
   margin-left: 350px;
   width: 221px;
   height: 196px;
+  list-style: none;
+  font-family: StratosSkyeng, sans-serif;
 `

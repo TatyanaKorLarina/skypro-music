@@ -20,19 +20,22 @@ function Filter() {
   return (
     <S.CenterblockFilter>
       <S.FilterTitle>Искать по:</S.FilterTitle>
-      <S.FilterButton className={activeFilter === '_btn-text' ? '_btn-text active' : '_btn-text'}
-        onClick={() => handleFilterClick('button-author _btn-text')}>
+      <S.FilterButton 
+        active={activeFilter === 'button-author'}
+        onClick={() => handleFilterClick('button-author')}>
         исполнителю
       </S.FilterButton>
-      <S.FilterButton className={activeFilter === '_btn-text' ? '_btn-text active' : '_btn-text'}
-        onClick={() => handleFilterClick('button-year _btn-text')}>
+      <S.FilterButton 
+        active={activeFilter === 'button-year'}
+        onClick={() => handleFilterClick('button-year')}>
         году выпуска
       </S.FilterButton>
-      <S.FilterButton className={activeFilter === '_btn-text' ? '_btn-text active' : '_btn-text'}
-        onClick={() => handleFilterClick('button-genre _btn-text')}>
+      <S.FilterButton 
+      active={activeFilter === 'button-genre'}
+        onClick={() => handleFilterClick('button-genre')}>
         жанру
       </S.FilterButton>
-      {activeFilter === '_btn-text' && (
+      {activeFilter === 'button-author' && (
         <S.PopUpAuthor>
           <S.Item>Nero</S.Item>
           <S.Item>Dynoro</S.Item>
@@ -56,7 +59,7 @@ function Filter() {
           <S.Item>Tom Boxer</S.Item>
         </S.PopUpAuthor>
       )}
-      {activeFilter === '_btn-text' && (
+      {activeFilter === 'button-year' && (
         <S.PopUpYear>
           <S.Item>1994</S.Item>
           <S.Item>1995</S.Item>
@@ -64,7 +67,7 @@ function Filter() {
           
         </S.PopUpYear>
       )}
-      {activeFilter === '_btn-text' && (
+      {activeFilter === 'button-genre' && (
         <S.PopUpGenre>
           <S.Item>rock</S.Item>
           <S.Item>rap</S.Item>

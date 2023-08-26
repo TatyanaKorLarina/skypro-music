@@ -69,6 +69,10 @@ export const TrackTitleLink = styled.a`
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline
+  }
 `
 
 export const TrackTitleSpan = styled.span`
@@ -96,6 +100,10 @@ export const TrackAuthorLink = styled.a`
   line-height: 24px;
   color: #ffffff;
   text-align: left;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline
+  }
 `
 
 export const TrackAlbum = styled.div`
@@ -108,6 +116,10 @@ export const TrackAlbumLink = styled.a`
   font-size: 16px;
   line-height: 24px;
   color: #696969;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline
+  }
  `
 
 export const TrackTime = styled.div`

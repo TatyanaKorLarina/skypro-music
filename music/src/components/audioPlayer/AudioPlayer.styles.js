@@ -74,10 +74,20 @@ export const PlayerBtnPrev = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 23px;
+  &:active {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+  &:hover {
+    stroke: white;
+    cursor: pointer;
+  }
 `
 export const PlayerBtnPrevSvg = styled.svg`
   width: 15px;
   height: 14px;
+  cursor: pointer;
 `
 
 export const PlayerBtnPlay = styled.div`
@@ -89,12 +99,18 @@ export const PlayerBtnPlay = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 23px;
+  &:active {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 `
 
 export const PlayerBtnPlaySvg = styled.svg`
   width: 22px;
   height: 20px;
   fill: #d9d9d9;
+  cursor: pointer;
 ` 
 
 export const PlayerBtnNext = styled.div`
@@ -107,6 +123,8 @@ export const PlayerBtnNext = styled.div`
   align-items: center;
   margin-right: 28px;
   fill: #a53939;
+  
+ 
 `
 
 export const PlayerBtnNextSvg = styled.svg`
@@ -114,6 +132,12 @@ export const PlayerBtnNextSvg = styled.svg`
   height: 14px;
   fill: inherit;
   stroke: #d9d9d9;
+  cursor: pointer;
+  &:active {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 ` 
 
 export const PlayerBtnRepeat = styled.div`
@@ -125,6 +149,7 @@ export const PlayerBtnRepeat = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 24px;
+  
 `
 
 export const PlayerBtnRepeatSvg = styled.svg`
@@ -132,6 +157,12 @@ export const PlayerBtnRepeatSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke:  #696969;
+  cursor: pointer;
+  &:hover {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 ` 
 
 export const PlayerBtnShuffle = styled.div`
@@ -142,6 +173,8 @@ export const PlayerBtnShuffle = styled.div`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
+  
 `
 
 export const PlayerBtnShuffleSvg = styled.svg`
@@ -149,6 +182,12 @@ export const PlayerBtnShuffleSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke:  #696969;
+  cursor: pointer;
+  &:active {
+    fill: white;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 ` 
 
 export const PlayerTrackPlay = styled.div`
@@ -214,6 +253,10 @@ export const TrackPlayAuthorLink = styled.a`
   line-height: 24px;
   color: #ffffff;
   white-space: nowrap;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline
+  }
 ` 
 
 export const TrackPlayAlbum = styled.div`
@@ -229,6 +272,10 @@ export const TrackPlayAlbumLink = styled.a`
   font-size: 13px;
   line-height: 24px;
   color: #ffffff;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline
+  }
 ` 
 
 export const TrackPlayLikeDis = styled.div`
