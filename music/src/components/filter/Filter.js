@@ -1,6 +1,43 @@
 import { useState } from 'react';
 import './Filter.css';
 
+import styled from 'styled-components'
+
+const StyledCenterblockFilter = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 51px;
+`
+
+const StyledFilterTitle = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-right: 15px;
+`
+
+const StyledFilterButton = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+`
+
 function Filter() {
   // Создаем состояние для отслеживания текущего активного фильтра
   const [activeFilter, setActiveFilter] = useState(null);
@@ -16,20 +53,20 @@ function Filter() {
     }
   };
   return (
-    <div className="centerblock__filter filter">
-      <div className="filter__title">Искать по:</div>
-      <switch className={activeFilter === 'filter__button button-author _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
-        onClick={() => handleFilterClick('filter__button button-author _btn-text')}>
+    <StyledCenterblockFilter>
+      <StyledFilterTitle>Искать по:</StyledFilterTitle>
+      <StyledFilterButton className={activeFilter === 'button-author _btn-text' ? '_btn-text active' : '_btn-text'}
+        onClick={() => handleFilterClick('button-author _btn-text')}>
         исполнителю
-      </switch>
-      <switch className={activeFilter === 'filter__button button-year _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
-        onClick={() => handleFilterClick('filter__button button-year _btn-text')}>
+      </StyledFilterButton>
+      <StyledFilterButton className={activeFilter === 'button-year _btn-text' ? '_btn-text active' : '_btn-text'}
+        onClick={() => handleFilterClick('button-year _btn-text')}>
         году выпуска
-      </switch>
-      <switch className={activeFilter === 'filter__button button-genre _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
+      </StyledFilterButton>
+      <StyledFilterButton className={activeFilter === 'button-genre _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
         onClick={() => handleFilterClick('filter__button button-genre _btn-text')}>
         жанру
-      </switch>
+      </StyledFilterButton>
       {activeFilter === 'filter__button button-author _btn-text' && (
         <ul className='pop-up-author'>
           <li className="item">Nero</li>
@@ -73,7 +110,7 @@ function Filter() {
           
         </ul>
       )}
-    </div>
+    </StyledCenterblockFilter>
   );
   
 }
