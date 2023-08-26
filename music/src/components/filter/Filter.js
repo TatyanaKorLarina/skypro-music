@@ -1,42 +1,7 @@
 import { useState } from 'react';
-import './Filter.css';
 
-import styled from 'styled-components'
 
-const StyledCenterblockFilter = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 51px;
-`
-
-const StyledFilterTitle = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  margin-right: 15px;
-`
-
-const StyledFilterButton = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  border: 1px solid #ffffff;
-  border-radius: 60px;
-  padding: 6px 20px;
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
-`
+import * as S from './Filter.styles'
 
 function Filter() {
   // Создаем состояние для отслеживания текущего активного фильтра
@@ -53,64 +18,64 @@ function Filter() {
     }
   };
   return (
-    <StyledCenterblockFilter>
-      <StyledFilterTitle>Искать по:</StyledFilterTitle>
-      <StyledFilterButton className={activeFilter === 'button-author _btn-text' ? '_btn-text active' : '_btn-text'}
+    <S.CenterblockFilter>
+      <S.FilterTitle>Искать по:</S.FilterTitle>
+      <S.FilterButton className={activeFilter === '_btn-text' ? '_btn-text active' : '_btn-text'}
         onClick={() => handleFilterClick('button-author _btn-text')}>
         исполнителю
-      </StyledFilterButton>
-      <StyledFilterButton className={activeFilter === 'button-year _btn-text' ? '_btn-text active' : '_btn-text'}
+      </S.FilterButton>
+      <S.FilterButton className={activeFilter === '_btn-text' ? '_btn-text active' : '_btn-text'}
         onClick={() => handleFilterClick('button-year _btn-text')}>
         году выпуска
-      </StyledFilterButton>
-      <StyledFilterButton className={activeFilter === 'button-genre _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
-        onClick={() => handleFilterClick('filter__button button-genre _btn-text')}>
+      </S.FilterButton>
+      <S.FilterButton className={activeFilter === '_btn-text' ? '_btn-text active' : '_btn-text'}
+        onClick={() => handleFilterClick('button-genre _btn-text')}>
         жанру
-      </StyledFilterButton>
-      {activeFilter === 'filter__button button-author _btn-text' && (
-        <ul className='pop-up-author'>
-          <li className="item">Nero</li>
-          <li className="item">Dynoro</li>
-          <li className="item">Outwork</li>
-          <li className="item">Mr. Gee</li>
-          <li className="item">Ali Bakgor</li>
-          <li className="item">Стоункат</li>
-          <li className="item">Psychopath</li>
-          <li className="item">Jaded</li>
-          <li className="item">Will Clarke</li>
-          <li className="item">AR/CO</li>
-          <li className="item">Blue Foundation</li>
-          <li className="item">Zeds Dead</li>
-          <li className="item">HYBIT</li>
-          <li className="item">Mr. Black</li>
-          <li className="item">Offer Nissim</li>
-          <li className="item">Hi Profile</li>
-          <li className="item">minthaze</li>
-          <li className="item">Calvin Harris</li>
-          <li className="item">Disciples</li>
-          <li className="item">Tom Boxer</li>
-        </ul>
+      </S.FilterButton>
+      {activeFilter === '_btn-text' && (
+        <S.PopUpAuthor>
+          <S.Item>Nero</S.Item>
+          <S.Item>Dynoro</S.Item>
+          <S.Item>Outwork</S.Item>
+          <S.Item>Mr. Gee</S.Item>
+          <S.Item>Ali Bakgor</S.Item>
+          <S.Item>Стоункат</S.Item>
+          <S.Item>Psychopath</S.Item>
+          <S.Item>Jaded</S.Item>
+          <S.Item>Will Clarke</S.Item>
+          <S.Item>AR/CO</S.Item>
+          <S.Item>Blue Foundation</S.Item>
+          <S.Item>Zeds Dead</S.Item>
+          <S.Item>HYBIT</S.Item>
+          <S.Item>Mr. Black</S.Item>
+          <S.Item>Offer Nissim</S.Item>
+          <S.Item>Hi Profile</S.Item>
+          <S.Item>minthaze</S.Item>
+          <S.Item>Calvin Harris</S.Item>
+          <S.Item>Disciples</S.Item>
+          <S.Item>Tom Boxer</S.Item>
+        </S.PopUpAuthor>
       )}
-      {activeFilter === 'filter__button button-year _btn-text' && (
-        <ul className='pop-up-year'>
-          <li className="item">1994</li>
-          <li className="item">1995</li>
-          <li className="item">2000</li>
+      {activeFilter === '_btn-text' && (
+        <S.PopUpYear>
+          <S.Item>1994</S.Item>
+          <S.Item>1995</S.Item>
+          <S.Item>2000</S.Item>
           
-        </ul>
+        </S.PopUpYear>
       )}
-      {activeFilter === 'filter__button button-genre _btn-text' && (
-        <ul className='pop-up-genre'>
-          <li className="item">rock</li>
-          <li className="item">rap</li>
-          <li className="item">hip-hop</li>
-          <li className="item">electronic</li>
-          <li className="item">house</li>
-          <li className="item">techno</li>
+      {activeFilter === '_btn-text' && (
+        <S.PopUpGenre>
+          <S.Item>rock</S.Item>
+          <S.Item>rap</S.Item>
+          <S.Item>hip-hop</S.Item>
+          <S.Item>electronic</S.Item>
+          <S.Item>house</S.Item>
+          <S.Item>techno</S.Item>
           
-        </ul>
+        </S.PopUpGenre>
       )}
-    </StyledCenterblockFilter>
+    </S.CenterblockFilter>
   );
   
 }
