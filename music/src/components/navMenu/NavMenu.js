@@ -1,7 +1,9 @@
 import React from 'react'
-import './NavMenu.css'
+import * as S from './NavMenu.styles'
 
 const { useState } = React
+
+
 
 function NavMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,32 +12,32 @@ function NavMenu() {
     setIsOpen(!isOpen);
   };
 
-  return (<nav className="main__nav nav">
-  <div className="nav__logo logo">
-    <img className="logo__image" src="img/logo.png" alt="logo" />
-  </div>
-  <switch className="nav__burger burger" onClick={toggleMenu}>
-    <span className="burger__line" />
-    <span className="burger__line" />
-    <span className="burger__line" />
-  </switch>
+  return (<S.MainNav>
+  <S.NavLogo>
+    <S.LogoImage src="img/logo.png" alt="logo" />
+  </S.NavLogo>
+  <S.NavBurger onClick={toggleMenu}>
+    <S.BurgerLine />
+    <S.BurgerLine />
+    <S.BurgerLine />
+  </S.NavBurger>
   {isOpen && (
-    <div className="nav__menu menu">
-      <ul className="menu__list">
-        <li className="menu__item">
-          <a href="../index.html" className="menu__link">Главное</a>
-        </li>
-        <li className="menu__item">
-          <a href="../index.html" className="menu__link">Мой плейлист</a>
-        </li>
-        <li className="menu__item">
-          <a href="../signin.html" className="menu__link">Войти</a>
-        </li>
-      </ul>
+    <S.NavMenu>
+      <S.MenuList>
+        <S.MenuItem>
+          <S.MenuLink href="../index.html">Главное</S.MenuLink>
+        </S.MenuItem>
+        <S.MenuItem>
+          <S.MenuLink href="../index.html">Мой плейлист</S.MenuLink>
+        </S.MenuItem>
+        <S.MenuItem>
+          <S.MenuLink href="../signin.html">Войти</S.MenuLink>
+        </S.MenuItem>
+      </S.MenuList>
     
-    </div>
+    </S.NavMenu>
   )}
-</nav>
+</S.MainNav>
     
   );
 };
