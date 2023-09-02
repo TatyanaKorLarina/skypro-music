@@ -1,13 +1,21 @@
 import { NavLink } from "react-router-dom";
 import React from 'react'
 import * as S from './NavMenu.styles'
-
+import { useNavigate } from 'react-router-dom'
 const { useState } = React
 
 
 
 function NavMenu() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [user, setUser] = useState(null)
+  const navigate = useNavigate()
+  const handleLogin = () => setUser(localStorage.setItem('user', 'token'))
+  const handleLogout = () => {
+    setUser(localStorage.clear())
+    navigate('/login', { replace: true })
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -37,10 +45,12 @@ function NavMenu() {
           </NavLink>
         
         </S.MenuItem>
-        <S.MenuItem>
-          <NavLink to="/login">
-            <S.MenuLink>Войти</S.MenuLink>
-          </NavLink>
+        <S.MenuItem user={user}>
+              {localStorage.getItem('user') ? (
+                <S.MenuLink onClick={handleLogout}>Выйти</S.MenuLink>
+              ) : (
+                <S.MenuLink onClick={handleLogin}>Войти</S.MenuLink>
+              )}
 
         </S.MenuItem>
       </S.MenuList>

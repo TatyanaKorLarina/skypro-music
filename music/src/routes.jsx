@@ -4,25 +4,45 @@ import { CategoryPage } from "./pages/category";
 import { FavoritesPage } from "./pages/favorites";
 import { NotFoundPage } from "./pages/not-found";
 import { LoginPage } from "./pages/login";
+import { RegisterPage } from "./pages/register";
+import { ProtectedRoute } from './components/protected-route'
 
-export const AppRoutes = () => {
+
+export const AppRoutes = ({ user }) => {
   return (
     <Routes>
       <Route
         path="/login"
         element={<LoginPage />}
       />
-      <Route
-        path="/main"
-        element={<MainPage />}
-      />
-      <Route
-        path="/favorites"
-        element={<FavoritesPage />}
-      />
+      <Route 
+        path="/register" 
+        element={<RegisterPage />} />
       <Route
         path="/category/:id"
-        element={<CategoryPage />}
+        element={
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
+            <CategoryPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/main"
+        element={
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
+            <MainPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/favourites"
+        element={
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
+            <FavoritesPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="*"
