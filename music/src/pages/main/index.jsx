@@ -13,7 +13,7 @@ import Filter from '../../components/filter/Filter';
 
 import * as S from '../../App.styles'
 
-export const MainPage = () => {
+export const MainPage = ({ categories }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ export const MainPage = () => {
             </S.CenterblockContent>
           </S.MainCenterblock>
           <Tracklist />
-          <Sidebar />
+          <Sidebar  categories={ categories }/>
         </S.Main>
         <AudioPlayer />
         <footer className="footer" />

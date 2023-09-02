@@ -1,30 +1,23 @@
 
 
 
-import Playlist from '../playlist/Playlist';
+import Playlist, { categories } from '../playlist/Playlist';
 
 import * as S from './Sidebar.styles'
 
-function Sidebar() {
+export default function Sidebar() {
   return (
     <S.MainSidebar>
             
             <S.SidebarBlock>
               <S.SidebarList>
-              <Playlist
-        imgUrl="img/playlist01.png"
+              <Playlist categories={ categories }
         
       />
-      <Playlist
-        imgUrl="img/playlist02.png"
-      />
-      <Playlist
-        imgUrl="img/playlist03.png"
-      />
+      
               </S.SidebarList>
             </S.SidebarBlock>
           </S.MainSidebar>
   );
 }
 
-export default Sidebar;
