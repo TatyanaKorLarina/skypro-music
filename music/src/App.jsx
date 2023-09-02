@@ -4,13 +4,14 @@ import AudioPlayer from './components/audioPlayer/AudioPlayer';
 import NavMenu from './components/navMenu/NavMenu';
 import Tracklist from './components/tracklist/Tracklist';
 import Sidebar from './components/sidebar/Sidebar';
-import './App.css';
+
 
 import TracklistSkeleton from './components/tracklistSkeleton/TracklistSkeleton'
 import AudioPlayerSkeleton from './components/audioPlayerSkeleton/AudioPlayerSkeleton'
 import SidebarSkeleton from './components/sidebarSkeleton/SidebarSkeleton'
 import Filter from './components/filter/Filter';
 
+import * as S from './App.styles'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,110 +28,111 @@ function App() {
 
   if (isLoading) {
     return (
-       
-      
-        <div className="App">
-          <div className="wrapper">
-            <div className="container">
-              <main className="main">
+      <>
+      <S.GlobalStyle />
+       <S.App>
+          <S.Wrapper>
+            <S.Container>
+              <S.Main>
                 <NavMenu />
-                <div className="main__centerblock centerblock">
-                  <div className="centerblock__search search">
-                    <svg className="search__svg">
+                <S.MainCenterblock>
+                  <S.CenterblockSearch>
+                    <S.SearchSvg>
                       <use xlinkHref="img/icon/sprite.svg#icon-search" />
-                    </svg>
-                    <input
-                      className="search__text"
+                    </S.SearchSvg>
+                    <S.SearchText
                       type="search"
                       placeholder="Поиск"
                       name="search"
                     />
-                    <div className="sidebar__personal">
-                      <div className="sidebar__personal-name">Sergey.Ivanov</div>
-                      <div className="sidebar__icon">
-                        <svg className="logout" alt="logout">
+                    <S.SidebarPersonal>
+                      <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+                      <S.SidebarIcon>
+                        <S.Logout alt="logout">
                           <use xlinkHref="img/icon/sprite.svg#logout" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <h2 className="centerblock__h2">Треки</h2>
+                        </S.Logout>
+                      </S.SidebarIcon>
+                    </S.SidebarPersonal>
+                  </S.CenterblockSearch>
+                  <S.CenterblockH2>Треки</S.CenterblockH2>
                   <Filter />
-                  <div className="centerblock__content">
-                    <div className="content__title playlist-title">
-                      <div className="playlist-title__col col01">Трек</div>
-                      <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-                      <div className="playlist-title__col col03">АЛЬБОМ</div>
-                      <div className="playlist-title__col col04">
-                        <svg className="playlist-title__svg" alt="time">
+                  <S.CenterblockContent>
+                    <S.ContentTitle>
+                      <S.PlaylistTitleCol1>Трек</S.PlaylistTitleCol1>
+                      <S.PlaylistTitleCol2>ИСПОЛНИТЕЛЬ</S.PlaylistTitleCol2>
+                      <S.PlaylistTitleCol3>АЛЬБОМ</S.PlaylistTitleCol3>
+                      <S.PlaylistTitleCol4>
+                        <S.PlaylistTitleSvg alt="time">
                           <use xlinkHref="img/icon/sprite.svg#icon-watch" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                        </S.PlaylistTitleSvg>
+                      </S.PlaylistTitleCol4>
+                    </S.ContentTitle>
+                  </S.CenterblockContent>
+                </S.MainCenterblock>
                 <TracklistSkeleton />
                 <SidebarSkeleton />
-              </main>
+              </S.Main>
               <AudioPlayerSkeleton />
               <footer className="footer" />
-            </div>
-          </div>
-        </div>
+            </S.Container>
+          </S.Wrapper>
+        </S.App> 
+      </>
+      
+        
       
     );
   }
   
   
   return ( 
-    <div className="App">
-    <div className="wrapper">
-      <div className="container">
-        <main className="main">
+    <S.App>
+    <S.Wrapper>
+      <S.Container>
+        <S.Main>
           <NavMenu />
-          <div className="main__centerblock centerblock">
-            <div className="centerblock__search search">
-              <svg className="search__svg">
+          <S.MainCenterblock>
+            <S.CenterblockSearch>
+              <S.SearchSvg>
                 <use xlinkHref="img/icon/sprite.svg#icon-search" />
-              </svg>
-              <input
-                className="search__text"
+              </S.SearchSvg>
+              <S.SearchText
                 type="search"
                 placeholder="Поиск"
                 name="search"
               />
-              <div className="sidebar__personal">
-        <p className="sidebar__personal-name">Sergey.Ivanov</p>
-        <div className="sidebar__icon">
-          <svg className="logout" alt="logout">
+              <S.SidebarPersonal>
+        <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+        <S.SidebarIcon>
+          <S.Logout alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
-          </svg>
-        </div>
-      </div>
-            </div>
-            <h2 className="centerblock__h2">Треки</h2>
+          </S.Logout>
+        </S.SidebarIcon>
+      </S.SidebarPersonal>
+            </S.CenterblockSearch>
+            <S.CenterblockH2>Треки</S.CenterblockH2>
             <Filter />
-            <div className="centerblock__content">
-              <div className="content__title playlist-title">
-                <div className="playlist-title__col col01">Трек</div>
-                <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-                <div className="playlist-title__col col03">АЛЬБОМ</div>
-                <div className="playlist-title__col col04">
-                  <svg className="playlist-title__svg" alt="time">
+            <S.CenterblockContent>
+              <S.ContentTitle>
+                <S.PlaylistTitleCol1>Трек</S.PlaylistTitleCol1>
+                <S.PlaylistTitleCol2>ИСПОЛНИТЕЛЬ</S.PlaylistTitleCol2>
+                <S.PlaylistTitleCol3>АЛЬБОМ</S.PlaylistTitleCol3>
+                <S.PlaylistTitleCol4>
+                  <S.PlaylistTitleSvg alt="time">
                     <use xlinkHref="img/icon/sprite.svg#icon-watch" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </S.PlaylistTitleSvg>
+                </S.PlaylistTitleCol4>
+              </S.ContentTitle>
+            </S.CenterblockContent>
+          </S.MainCenterblock>
           <Tracklist />
           <Sidebar />
-        </main>
+        </S.Main>
         <AudioPlayer />
         <footer className="footer" />
-      </div>
-    </div>
-  </div>
+      </S.Container>
+    </S.Wrapper>
+  </S.App>
 
 );
     }

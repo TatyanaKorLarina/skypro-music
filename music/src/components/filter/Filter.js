@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import './Filter.css';
+
+
+import * as S from './Filter.styles'
 
 function Filter() {
   // Создаем состояние для отслеживания текущего активного фильтра
@@ -16,64 +18,67 @@ function Filter() {
     }
   };
   return (
-    <div className="centerblock__filter filter">
-      <div className="filter__title">Искать по:</div>
-      <switch className={activeFilter === 'filter__button button-author _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
-        onClick={() => handleFilterClick('filter__button button-author _btn-text')}>
+    <S.CenterblockFilter>
+      <S.FilterTitle>Искать по:</S.FilterTitle>
+      <S.FilterButton 
+        active={activeFilter === 'button-author'}
+        onClick={() => handleFilterClick('button-author')}>
         исполнителю
-      </switch>
-      <switch className={activeFilter === 'filter__button button-year _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
-        onClick={() => handleFilterClick('filter__button button-year _btn-text')}>
+      </S.FilterButton>
+      <S.FilterButton 
+        active={activeFilter === 'button-year'}
+        onClick={() => handleFilterClick('button-year')}>
         году выпуска
-      </switch>
-      <switch className={activeFilter === 'filter__button button-genre _btn-text' ? 'filter__button  _btn-text active' : 'filter__button  _btn-text'}
-        onClick={() => handleFilterClick('filter__button button-genre _btn-text')}>
+      </S.FilterButton>
+      <S.FilterButton 
+      active={activeFilter === 'button-genre'}
+        onClick={() => handleFilterClick('button-genre')}>
         жанру
-      </switch>
-      {activeFilter === 'filter__button button-author _btn-text' && (
-        <ul className='pop-up-author'>
-          <li className="item">Nero</li>
-          <li className="item">Dynoro</li>
-          <li className="item">Outwork</li>
-          <li className="item">Mr. Gee</li>
-          <li className="item">Ali Bakgor</li>
-          <li className="item">Стоункат</li>
-          <li className="item">Psychopath</li>
-          <li className="item">Jaded</li>
-          <li className="item">Will Clarke</li>
-          <li className="item">AR/CO</li>
-          <li className="item">Blue Foundation</li>
-          <li className="item">Zeds Dead</li>
-          <li className="item">HYBIT</li>
-          <li className="item">Mr. Black</li>
-          <li className="item">Offer Nissim</li>
-          <li className="item">Hi Profile</li>
-          <li className="item">minthaze</li>
-          <li className="item">Calvin Harris</li>
-          <li className="item">Disciples</li>
-          <li className="item">Tom Boxer</li>
-        </ul>
+      </S.FilterButton>
+      {activeFilter === 'button-author' && (
+        <S.PopUpAuthor>
+          <S.Item>Nero</S.Item>
+          <S.Item>Dynoro</S.Item>
+          <S.Item>Outwork</S.Item>
+          <S.Item>Mr. Gee</S.Item>
+          <S.Item>Ali Bakgor</S.Item>
+          <S.Item>Стоункат</S.Item>
+          <S.Item>Psychopath</S.Item>
+          <S.Item>Jaded</S.Item>
+          <S.Item>Will Clarke</S.Item>
+          <S.Item>AR/CO</S.Item>
+          <S.Item>Blue Foundation</S.Item>
+          <S.Item>Zeds Dead</S.Item>
+          <S.Item>HYBIT</S.Item>
+          <S.Item>Mr. Black</S.Item>
+          <S.Item>Offer Nissim</S.Item>
+          <S.Item>Hi Profile</S.Item>
+          <S.Item>minthaze</S.Item>
+          <S.Item>Calvin Harris</S.Item>
+          <S.Item>Disciples</S.Item>
+          <S.Item>Tom Boxer</S.Item>
+        </S.PopUpAuthor>
       )}
-      {activeFilter === 'filter__button button-year _btn-text' && (
-        <ul className='pop-up-year'>
-          <li className="item">1994</li>
-          <li className="item">1995</li>
-          <li className="item">2000</li>
+      {activeFilter === 'button-year' && (
+        <S.PopUpYear>
+          <S.Item>1994</S.Item>
+          <S.Item>1995</S.Item>
+          <S.Item>2000</S.Item>
           
-        </ul>
+        </S.PopUpYear>
       )}
-      {activeFilter === 'filter__button button-genre _btn-text' && (
-        <ul className='pop-up-genre'>
-          <li className="item">rock</li>
-          <li className="item">rap</li>
-          <li className="item">hip-hop</li>
-          <li className="item">electronic</li>
-          <li className="item">house</li>
-          <li className="item">techno</li>
+      {activeFilter === 'button-genre' && (
+        <S.PopUpGenre>
+          <S.Item>rock</S.Item>
+          <S.Item>rap</S.Item>
+          <S.Item>hip-hop</S.Item>
+          <S.Item>electronic</S.Item>
+          <S.Item>house</S.Item>
+          <S.Item>techno</S.Item>
           
-        </ul>
+        </S.PopUpGenre>
       )}
-    </div>
+    </S.CenterblockFilter>
   );
   
 }

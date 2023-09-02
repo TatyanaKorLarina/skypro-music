@@ -1,17 +1,17 @@
 
-import './Playlist.css';
+import * as S from './Playlist.styles'
+
 
 function Playlist(props) {
   return (
-    <div className="sidebar__item">
-                  <a className="sidebar__link" href="../index.html">
-                    <img
-                      className="sidebar__img"
+    <S.SidebarItem>
+                  <S.SidebarLink href="../index.html">
+                    <S.SidebarImg
                       src={props.imgUrl}
                       alt="day's playlist"
                     />
-                  </a>
-                </div>
+                  </S.SidebarLink>
+                </S.SidebarItem>
   );
 }
 

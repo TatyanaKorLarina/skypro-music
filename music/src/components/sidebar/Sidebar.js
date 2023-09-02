@@ -1,14 +1,16 @@
 
-import './Sidebar.css';
+
 
 import Playlist from '../playlist/Playlist';
 
+import * as S from './Sidebar.styles'
+
 function Sidebar() {
   return (
-    <div className="main__sidebar sidebar">
+    <S.MainSidebar>
             
-            <div className="sidebar__block">
-              <div className="sidebar__list">
+            <S.SidebarBlock>
+              <S.SidebarList>
               <Playlist
         imgUrl="img/playlist01.png"
         
@@ -19,9 +21,9 @@ function Sidebar() {
       <Playlist
         imgUrl="img/playlist03.png"
       />
-              </div>
-            </div>
-          </div>
+              </S.SidebarList>
+            </S.SidebarBlock>
+          </S.MainSidebar>
   );
 }
 
