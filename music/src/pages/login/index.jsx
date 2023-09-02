@@ -1,7 +1,9 @@
 export const LoginPage = () => {
     return (
       <div>
-        <h1>LoginPage</h1>
+        <h1>Страница логина</h1>
+        <button>Войти</button>
+        <div>Перейти к регистрации</div>
       </div>
     );
   };

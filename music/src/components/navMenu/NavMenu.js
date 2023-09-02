@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import React from 'react'
 import * as S from './NavMenu.styles'
 
@@ -25,13 +26,22 @@ function NavMenu() {
     <S.NavMenu>
       <S.MenuList>
         <S.MenuItem>
-          <S.MenuLink href="../index.html">Главное</S.MenuLink>
+          <NavLink to="/main">
+            <S.MenuLink>Главное</S.MenuLink>
+          </NavLink>
+          
         </S.MenuItem>
         <S.MenuItem>
-          <S.MenuLink href="../index.html">Мой плейлист</S.MenuLink>
+          <NavLink to="/favorites">
+            <S.MenuLink>Мой плейлист</S.MenuLink>
+          </NavLink>
+        
         </S.MenuItem>
         <S.MenuItem>
-          <S.MenuLink href="../signin.html">Войти</S.MenuLink>
+          <NavLink to="/login">
+            <S.MenuLink>Войти</S.MenuLink>
+          </NavLink>
+
         </S.MenuItem>
       </S.MenuList>
     
