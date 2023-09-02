@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
   min-height: 100%;
   overflow: hidden;
   background-color: #383838;
-  overflow: scroll;
+  
   
 `
 
@@ -35,6 +35,7 @@ export const Container = styled.div`
   position: relative;
   background-color: #181818;
   color: #ffffff;
+  overflow: scroll;
   
 `
 
@@ -50,7 +51,8 @@ export const Main = styled.main`
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  overflow: scroll;
+  
+  
 `
 
 export const MainCenterblock = styled.div`
