@@ -5,7 +5,7 @@ import { FavoritesPage } from "./pages/favorites";
 import { NotFoundPage } from "./pages/not-found";
 import { LoginPage } from "./pages/login";
 import { RegisterPage } from "./pages/register";
-import { ProtectedRoute } from './components/protected-route'
+import { ProtectedRoute } from './components/protected-route';
 
 
 export const AppRoutes = ({ user }) => {
@@ -28,6 +28,15 @@ export const AppRoutes = ({ user }) => {
       />
 
       <Route
+        path="/"
+        element={
+          <ProtectedRoute user={user} isAllowed={Boolean(user)}>
+            <MainPage />
+          </ProtectedRoute>
+        }
+      />
+
+<Route
         path="/main"
         element={
           <ProtectedRoute user={user} isAllowed={Boolean(user)}>
@@ -37,7 +46,7 @@ export const AppRoutes = ({ user }) => {
       />
 
       <Route
-        path="/favourites"
+        path="/favorites"
         element={
           <ProtectedRoute user={user} isAllowed={Boolean(user)}>
             <FavoritesPage />
