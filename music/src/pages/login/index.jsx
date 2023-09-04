@@ -10,7 +10,7 @@ export const LoginPage = () => {
   return (
     <div>
       <h1>Страница логина</h1>
-      <Link to="/login">
+      <Link to="/">
       <button onClick={setUser}>Войти</button>
       </Link>
       

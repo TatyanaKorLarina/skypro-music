@@ -34,7 +34,7 @@ function NavMenu() {
     <S.NavMenu>
       <S.MenuList>
         <S.MenuItem>
-          <NavLink to="/main">
+          <NavLink to="/">
             <S.MenuLink>Главное</S.MenuLink>
           </NavLink>
           
@@ -49,6 +49,7 @@ function NavMenu() {
               {localStorage.getItem('user') ? (
                 <S.MenuLink onClick={handleLogout}>Выйти</S.MenuLink>
               ) : (
+                
                 <S.MenuLink onClick={handleLogin}>Войти</S.MenuLink>
               )}
 
