@@ -10,6 +10,7 @@ export const ContentPlaylist = styled.div`
   flex-direction: column;
   overflow-y: auto;
   margin-left: 400px;
+  
 `
 
 export const PlaylistTrack = styled.div`

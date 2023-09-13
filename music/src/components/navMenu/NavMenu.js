@@ -1,12 +1,21 @@
+import { NavLink } from "react-router-dom";
 import React from 'react'
 import * as S from './NavMenu.styles'
-
+import { useNavigate } from 'react-router-dom'
 const { useState } = React
 
 
 
 function NavMenu() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [user, setUser] = useState(null)
+  const navigate = useNavigate()
+  const handleLogin = () => setUser(localStorage.setItem('user', 'token'))
+  const handleLogout = () => {
+    setUser(localStorage.clear())
+    navigate('/login', { replace: true })
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -25,13 +34,25 @@ function NavMenu() {
     <S.NavMenu>
       <S.MenuList>
         <S.MenuItem>
-          <S.MenuLink href="../index.html">Главное</S.MenuLink>
+          <NavLink to="/">
+            <S.MenuLink>Главное</S.MenuLink>
+          </NavLink>
+          
         </S.MenuItem>
         <S.MenuItem>
-          <S.MenuLink href="../index.html">Мой плейлист</S.MenuLink>
+          <NavLink to="/favorites">
+            <S.MenuLink>Мой плейлист</S.MenuLink>
+          </NavLink>
+        
         </S.MenuItem>
-        <S.MenuItem>
-          <S.MenuLink href="../signin.html">Войти</S.MenuLink>
+        <S.MenuItem user={user}>
+              {localStorage.getItem('user') ? (
+                <S.MenuLink onClick={handleLogout}>Выйти</S.MenuLink>
+              ) : (
+                
+                <S.MenuLink onClick={handleLogin}>Войти</S.MenuLink>
+              )}
+
         </S.MenuItem>
       </S.MenuList>
     

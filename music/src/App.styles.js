@@ -16,6 +16,7 @@ export const App = styled.div`
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  
 `
 
 export const Wrapper = styled.div`
@@ -23,6 +24,8 @@ export const Wrapper = styled.div`
   min-height: 100%;
   overflow: hidden;
   background-color: #383838;
+  
+  
 `
 
 export const Container = styled.div`
@@ -32,6 +35,8 @@ export const Container = styled.div`
   position: relative;
   background-color: #181818;
   color: #ffffff;
+  overflow: scroll;
+  
 `
 
 export const Main = styled.main`
@@ -46,6 +51,8 @@ export const Main = styled.main`
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  
+  
 `
 
 export const MainCenterblock = styled.div`
