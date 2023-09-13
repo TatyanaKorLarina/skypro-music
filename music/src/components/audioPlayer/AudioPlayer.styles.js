@@ -246,7 +246,7 @@ export const TrackPlayAuthor = styled.div`
   min-width: 49px;
 ` 
 
-export const TrackPlayAuthorLink = styled.a`
+export const TrackPlayAuthorLink = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

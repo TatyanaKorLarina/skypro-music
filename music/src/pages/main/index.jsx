@@ -5,7 +5,7 @@ import NavMenu from '../../components/navMenu/NavMenu';
 import Tracklist from '../../components/tracklist/Tracklist';
 import Sidebar from '../../components/sidebar/Sidebar';
 
-
+//import { getTracks } from '../../api';
 import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkeleton'
 import AudioPlayerSkeleton from '../../components/audioPlayerSkeleton/AudioPlayerSkeleton'
 import SidebarSkeleton from '../../components/sidebarSkeleton/SidebarSkeleton'
@@ -25,7 +25,7 @@ export const MainPage = ({ categories }) => {
   
     }
   }, []);
-
+  //getTracks().then((tracks) => console.log(tracks));
   if (isLoading) {
     return (
       <>
@@ -83,6 +83,7 @@ export const MainPage = ({ categories }) => {
       
     );
   }
+  
   
   
   return ( 
