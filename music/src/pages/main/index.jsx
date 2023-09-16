@@ -16,6 +16,7 @@ import * as S from '../../App.styles'
 export const MainPage = ({ categories }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tracks, setTracks] = useState([]);
+  const [tracksError, setTracksError] = useState(null)
 
   useEffect(() => {
     getTracks()
@@ -24,6 +25,10 @@ export const MainPage = ({ categories }) => {
         console.log(tracks)
       })
       .then(() => setIsLoading(false))
+      .catch((error) => {
+        setTracksError(error.message)
+        setIsLoading(false)
+      })
   }, [])
   //getTracks().then((tracks) => console.log(tracks));
   if (isLoading) {
@@ -67,6 +72,9 @@ export const MainPage = ({ categories }) => {
                         </S.PlaylistTitleSvg>
                       </S.PlaylistTitleCol4>
                     </S.ContentTitle>
+                    <p style={{ color: 'red', position: 'relative' }}>
+                      {tracksError}
+                    </p>
                     {isLoading && <TracklistSkeleton />}
                     
                     {!isLoading && <Tracklist tracks={tracks} />}
