@@ -1,24 +1,17 @@
-import { useEffect, useState } from 'react'
-import { getTracks } from '../../api'
+//import { useEffect, useState } from 'react'
+//import { getTracks } from '../../api'
 import * as S from './Traclist.styles'
 //import Track from '../track/Track';
 
 
 
-function Tracklist() {
-  const [tracks, setTracks] = useState([])
-
-  useEffect(() => {
-    getTracks().then((tracks) => {
-      setTracks(tracks)
-      console.log(tracks)
-    })
-  }, [])
+function Tracklist({ tracks, setCurrentTrack }) {
+  
   return (
     <S.ContentPlaylist> 
       {tracks.map((track) => {
         return (
-          <S.PlaylistItem key={track.id}>
+          <S.PlaylistItem key={track.id} onClick={() => setCurrentTrack(track)}>
       
             <S.PlaylistTrack>
               <S.TrackTitle>
@@ -28,18 +21,18 @@ function Tracklist() {
                   </S.TrackTitleSvg>
                 </S.TrackTitleImage>
                 <S.TrackTitleText>
-                  <S.TrackTitleLink href="http://">
+                  <S.TrackTitleLink>
                     {track.name}
                     <S.TrackTitleSpan /></S.TrackTitleLink>
                 </S.TrackTitleText>
               </S.TrackTitle>
               <S.TrackAuthor>
-                <S.TrackAuthorLink href="http://" >
+                <S.TrackAuthorLink>
                   {track.author}
                 </S.TrackAuthorLink>
               </S.TrackAuthor>
               <S.TrackAlbum>
-                <S.TrackAlbumLink href="http://" >
+                <S.TrackAlbumLink>
                   {track.album}
                 </S.TrackAlbumLink>
               </S.TrackAlbum>

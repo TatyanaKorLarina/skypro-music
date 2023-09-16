@@ -1,7 +1,7 @@
 import  styled  from 'styled-components'
 
 export const ContentTracklist = styled.div`
-    margin-left: 0px;
+    margin-left: 400px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
