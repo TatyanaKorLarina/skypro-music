@@ -5,7 +5,7 @@ import NavMenu from '../../components/navMenu/NavMenu';
 import Tracklist from '../../components/tracklist/Tracklist';
 import Sidebar from '../../components/sidebar/Sidebar';
 
-//import { getTracks } from '../../api';
+import { getTracks } from '../../api';
 import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkeleton'
 import AudioPlayerSkeleton from '../../components/audioPlayerSkeleton/AudioPlayerSkeleton'
 import SidebarSkeleton from '../../components/sidebarSkeleton/SidebarSkeleton'
@@ -15,16 +15,16 @@ import * as S from '../../App.styles'
 
 export const MainPage = ({ categories }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-    return () => {
-      clearTimeout(timer);
-  
-    }
-  }, []);
+    getTracks()
+      .then((tracks) => {
+        setTracks(tracks)
+        console.log(tracks)
+      })
+      .then(() => setIsLoading(false))
+  }, [])
   //getTracks().then((tracks) => console.log(tracks));
   if (isLoading) {
     return (
@@ -67,6 +67,9 @@ export const MainPage = ({ categories }) => {
                         </S.PlaylistTitleSvg>
                       </S.PlaylistTitleCol4>
                     </S.ContentTitle>
+                    {isLoading && <TracklistSkeleton />}
+                    
+                    {!isLoading && <Tracklist tracks={tracks} />}
                   </S.CenterblockContent>
                 </S.MainCenterblock>
                 <TracklistSkeleton />
