@@ -1,5 +1,11 @@
 import  styled  from 'styled-components'
 
+export const PlaylistItem = styled.div`
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+ ` 
+
 export const ContentPlaylist = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;

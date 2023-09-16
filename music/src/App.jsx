@@ -1,11 +1,12 @@
 import { AppRoutes } from "./routes";
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import "./App.styles";
-import { getTracks } from "./api";
+//import { getTracks } from "./api";
 function App() {
   const [user, setUser] = useState(null);
-  const [musicTracks, setMusicTracks] = useState([]);
+  //const [musicTracks, setMusicTracks] = useState([]);
+  //const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = () => setUser(localStorage.setItem('user', 'token'))
@@ -14,19 +15,20 @@ function App() {
     navigate('/login', { replace: true })
   }
 
-  useEffect(() => {
-    
+  /*useEffect(() => {
+    setIsLoading(true);  
     getTracks()
       .then((musicTracks) => setMusicTracks(musicTracks.musicTracks));
+    setIsLoading(false); 
       
-      
-  }, []);
+  }, []);*/
   
   return (
     <div className="App">
       <div className="App-layout">
         <AppRoutes  
-          musicTracks={musicTracks}
+          //musicTracks={musicTracks}
+          //isLoading={isLoading}
           user={user}
           onAuthButtonClick={user ? handleLogout : handleLogin} />
       </div>
