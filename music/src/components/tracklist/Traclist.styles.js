@@ -1,5 +1,12 @@
 import  styled  from 'styled-components'
 
+export const PlaylistItem = styled.div`
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+  cursor: pointer;
+ ` 
+
 export const ContentPlaylist = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
@@ -70,7 +77,7 @@ export const TrackTitleSvg = styled.svg`
 export const TrackTitleText = styled.div`
 `
 
-export const TrackTitleLink = styled.a`
+export const TrackTitleLink = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -112,7 +119,7 @@ export const TrackAlbum = styled.div`
   width: 245px;
 `
 
-export const TrackAlbumLink = styled.a`
+export const TrackAlbumLink = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

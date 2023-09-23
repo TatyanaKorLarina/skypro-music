@@ -1,8 +1,10 @@
 import * as S from './AudioPlayer.styles'
 
-function AudioPlayer() {
-  return (
-    <S.Bar>
+export default function AudioPlayer(currentTrack) {
+  if (!currentTrack) return null
+  if (currentTrack) {
+    return (
+      <S.Bar>
           <S.BarContent>
             <S.BarPlayerProgress />
             <S.BarPlayerBlock>
@@ -44,10 +46,10 @@ function AudioPlayer() {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink href="http://"
-                        >Ты та...</S.TrackPlayAuthorLink>
+                        >{currentTrack.currentTrack.name}</S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
-                      <S.TrackPlayAlbumLink href="http://">Баста</S.TrackPlayAlbumLink>
+                      <S.TrackPlayAlbumLink href="http://">{currentTrack.currentTrack.author}</S.TrackPlayAlbumLink>
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
 
@@ -85,7 +87,5 @@ function AudioPlayer() {
             </S.BarPlayerBlock>
           </S.BarContent>
         </S.Bar>
-  );
-}
-
-export default AudioPlayer;
+  )
+    }}
