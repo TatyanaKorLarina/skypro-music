@@ -1,14 +1,22 @@
 import * as S from './AudioPlayer.styles';
 //import { styled } from "styled-components";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function AudioPlayer({ currentTrack }) {
   if (!currentTrack) return null
   if (currentTrack) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
+    const [currentDuration, setCurrentDuration] = useState(0);
+    const [volume, setVolume] = useState(60);
     const audioRef = useRef(null);
     const progressBarRef = useRef(null);
+
+    useEffect(() => {
+      if (audioRef) {
+        audioRef.current.volume = volume / 100;
+      }
+    }, [volume, audioRef]);
 
   const handleStart = () => {
     audioRef.current.play();
@@ -24,14 +32,30 @@ export default function AudioPlayer({ currentTrack }) {
 
   
   const duration = currentTrack.duration_in_seconds;
-  const minForPlayer = Math.floor(duration / 60);
-  const secForPlayer = Math.floor(minForPlayer % 60);
+  
   const handleProgress = () => {
     const currentProgress = audioRef.current.currentTime;
     setCurrentTime(currentProgress);
   };
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
+  };
+
+  const onLoadedMetadata = () => {
+    const seconds = audioRef.current.duration;
+    setCurrentDuration(seconds);
+    progressBarRef.current.max = seconds;
+  };
+
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return "00:00";
   };
     return (
       <>
@@ -40,11 +64,12 @@ export default function AudioPlayer({ currentTrack }) {
           ref={audioRef}
           src={currentTrack.track_file}
           onTimeUpdate={handleProgress}
+          onLoadedMetadata={onLoadedMetadata}
           type="audio/mpeg"
         ></audio>
         <S.Bar>
           <S.TimeBar>
-            Current time /{minForPlayer}:{secForPlayer}
+          {formatTime(currentTime)} /{formatTime(currentDuration)}
           </S.TimeBar>
           <S.BarContent>
           
@@ -59,7 +84,7 @@ export default function AudioPlayer({ currentTrack }) {
             </S.BarPlayerProgress> 
             <S.BarPlayerBlock>
               <S.BarPlayer>
-                <S.PlayerControls 
+                <S.PlayerControls isPlaying={isPlaying} currentTrack={currentTrack}
                 togglePlay={togglePlay}>
                   <S.PlayerBtnPrev>
                     <S.PlayerBtnPrevSvg alt="prev">
@@ -68,7 +93,11 @@ export default function AudioPlayer({ currentTrack }) {
                   </S.PlayerBtnPrev>
                   <S.PlayerBtnPlay>
                     <S.PlayerBtnPlaySvg alt="play" onClick={togglePlay}>
-                      <use xlinkHref="img/icon/sprite.svg#icon-play" />
+                    {isPlaying ? (
+                      <use xlinkHref="img/icon/sprite.svg#icon-pause"></use>
+                    ) : (
+                      <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+                    )}
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
                   <S.PlayerBtnNext>
@@ -120,7 +149,8 @@ export default function AudioPlayer({ currentTrack }) {
                   </S.TrackPlayLikeDis>
                 </S.PlayerTrackPlay>
               </S.BarPlayer>
-              <S.BarVolumeBlock>
+              <S.BarVolumeBlock volume={volume}
+              setVolume={setVolume}>
                 <S.VolumeContent>
                   <S.VolumeImage>
                     <S.VolumeSvg alt="volume">
@@ -133,8 +163,8 @@ export default function AudioPlayer({ currentTrack }) {
                       name="range"
                       min={0}
                       max={100}
-                      //value={volume}
-                      //onChange={(e) => setVolume(e.target.value)}
+                      value={volume}
+                      onChange={(e) => setVolume(e.target.value)}
                     />
                   </S.VolumeProgress>
                 </S.VolumeContent>
