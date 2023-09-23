@@ -1,22 +1,45 @@
 import * as S from './AudioPlayer.styles'
+import { useRef, useState } from "react";
 
-export default function AudioPlayer(currentTrack) {
+export default function AudioPlayer({ currentTrack }) {
   if (!currentTrack) return null
   if (currentTrack) {
+    const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  const handleStart = () => {
+    audioRef.current.play();
+    setIsPlaying(true);
+  };
+
+  const handleStop = () => {
+    audioRef.current.pause();
+    setIsPlaying(false);
+  };
+
+  const togglePlay = isPlaying ? handleStop : handleStart;
     return (
       <S.Bar>
+        
           <S.BarContent>
+          <audio
+          controls
+          ref={audioRef}
+          src={currentTrack.track_file}
+          type="audio/mpeg"
+        ></audio>
             <S.BarPlayerProgress />
             <S.BarPlayerBlock>
               <S.BarPlayer>
-                <S.PlayerControls>
+                <S.PlayerControls currentTrack={currentTrack}
+              togglePlay={togglePlay}>
                   <S.PlayerBtnPrev>
                     <S.PlayerBtnPrevSvg alt="prev">
                       <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                     </S.PlayerBtnPrevSvg>
                   </S.PlayerBtnPrev>
                   <S.PlayerBtnPlay>
-                    <S.PlayerBtnPlaySvg alt="play">
+                    <S.PlayerBtnPlaySvg alt="play" onClick={togglePlay}>
                       <use xlinkHref="img/icon/sprite.svg#icon-play" />
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
@@ -37,7 +60,7 @@ export default function AudioPlayer(currentTrack) {
                   </S.PlayerBtnShuffle>
                 </S.PlayerControls>
 
-                <S.PlayerTrackPlay>
+                <S.PlayerTrackPlay currentTrack={currentTrack}>
                   <S.TrackPlayContain>
                     <S.TrackPlayImage>
                       <S.TrackPlaySvg alt="music">
@@ -46,10 +69,10 @@ export default function AudioPlayer(currentTrack) {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink href="http://"
-                        >{currentTrack.currentTrack.name}</S.TrackPlayAuthorLink>
+                        >{currentTrack.name}</S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
-                      <S.TrackPlayAlbumLink href="http://">{currentTrack.currentTrack.author}</S.TrackPlayAlbumLink>
+                      <S.TrackPlayAlbumLink href="http://">{currentTrack.author}</S.TrackPlayAlbumLink>
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
 
