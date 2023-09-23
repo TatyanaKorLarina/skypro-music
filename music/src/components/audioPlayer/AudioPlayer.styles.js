@@ -211,8 +211,8 @@ export const PlayerBtnRepeat = styled.div`
 export const PlayerBtnRepeatSvg = styled.svg`
   width: 18px;
   height: 12px;
-  fill: transparent;
-  stroke:  #696969;
+  fill: #696969;
+  
   cursor: pointer;
   &:hover {
     fill: #696969;
