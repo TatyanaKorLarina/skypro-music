@@ -5,6 +5,8 @@ import "./App.styles";
 //import { getTracks } from "./api";
 function App() {
   const [user, setUser] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   //const [musicTracks, setMusicTracks] = useState([]);
   //const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -30,6 +32,10 @@ function App() {
           //musicTracks={musicTracks}
           //isLoading={isLoading}
           user={user}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
           onAuthButtonClick={user ? handleLogout : handleLogin} />
       </div>
     </div>
