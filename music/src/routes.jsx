@@ -8,9 +8,7 @@ import { LoginPage } from "./pages/login/LoginPage";
 import { ProtectedRoute } from './components/protected-route';
 
 
-export const AppRoutes = ({ user, setUser, email, setEmail, username,
-  setUsername, password, setPassword, repeatPassword,
-  setRepeatPassword }) => {
+export const AppRoutes = ({ user, setUser}) => {
   return (
     <Routes>
       <Route
@@ -18,10 +16,6 @@ export const AppRoutes = ({ user, setUser, email, setEmail, username,
         element={
           <LoginPage
           isLoginMode={true}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
           user={user}
           setUser={setUser}
           />
@@ -32,16 +26,10 @@ export const AppRoutes = ({ user, setUser, email, setEmail, username,
         element={
           <LoginPage
             isLoginMode={false}
-            email={email}
-            setEmail={setEmail}
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
+            
             user={user}
             setUser={setUser}
-            repeatPassword={repeatPassword}
-            setRepeatPassword={setRepeatPassword}
+            
           ></LoginPage>
         }/>
       <Route

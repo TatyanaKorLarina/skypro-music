@@ -5,10 +5,10 @@ import "./App.styles";
 //import { getTracks } from "./api";
 function App() {
   const [user, setUser] = useState(null);
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  //const [email, setEmail] = useState("");
+  //const [username, setUsername] = useState("");
+  //const [password, setPassword] = useState("");
+  //const [repeatPassword, setRepeatPassword] = useState("");
   //const [musicTracks, setMusicTracks] = useState([]);
   //const [isLoading, setIsLoading] = useState(false);
   //const navigate = useNavigate();
@@ -35,14 +35,15 @@ function App() {
           //isLoading={isLoading}
           user={user}
           setUser={setUser}
-          email={email}
-          setEmail={setEmail}
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-          repeatPassword={repeatPassword}
-          setRepeatPassword={setRepeatPassword} />
+          //email={email}
+          //setEmail={setEmail}
+          //username={username}
+          //setUsername={setUsername}
+          //password={password}
+          //setPassword={setPassword}
+          //repeatPassword={repeatPassword}
+          //setRepeatPassword={setRepeatPassword}
+           />
       </div>
     </div>
   );

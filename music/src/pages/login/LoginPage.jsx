@@ -5,17 +5,13 @@ import { useState, useEffect } from "react";
 
 export const LoginPage = ({
   isLoginMode = false,
-  email,
-  setEmail,
-  username,
-  setUsername,
-  password,
-  setPassword,
-  repeatPassword,
-  setRepeatPassword,
   user,
   setUser
 }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [textError, setTextError] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -57,19 +53,17 @@ export const LoginPage = ({
       username: username,
       email: email,
       password: password,
-    })
-      .then((response) => {
-        setUser(response.username);
-      })
-      .catch((error) => {
-        setTextError(error.message);
-      });
-    if (username) {
-      navigate("/");
-      setTextError("");
-    }
+    }).then((obj) => {
+      if (obj.status === 400) {
+        const errorMail = obj.data.email;
+        const errorUser = obj.data.username;
+        const ErrorPassword = obj.data.password;
+
+        setTextError(errorMail + errorUser + ErrorPassword);
+      }
+      setUser(obj.data.username);
+    });
   };
-  console.log(user);
 
   const handleRegister = async () => {
     if (!email) {

@@ -46,10 +46,10 @@ export async function getTracks() {
       headers: {
         "content-type": "application/json",
       },
-    }).then((response) => {
-      if (response.status === 400) {
-        throw new Error("Ошибка входа");
-      }
-      return response.json();
+    }).then(async (response) => {
+      const statusRequest = response.status;
+      const dataRequest = await response.json();
+      const object = { status: statusRequest, data: dataRequest };
+      return object;
     });
   }
