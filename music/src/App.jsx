@@ -1,9 +1,16 @@
 import { AppRoutes } from "./routes";
-import { useState } from 'react'
+import { useState, useEffect } from "react";
 //import { useNavigate } from "react-router-dom";
 import "./App.styles";
-//import { getTracks } from "./api";
+import AudioPlayer from "./components/audioPlayer/AudioPlayer"
+import { UserContext } from "./contexts/user";
+import { getTracks } from "./api";
+
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [tracks, setTracks] = useState([]);
+  const [tracksError, setTracksError] = useState(null);
+  const [currentTrack, setCurrentTrack] = useState(null);
   const [user, setUser] = useState(null);
   //const [email, setEmail] = useState("");
   //const [username, setUsername] = useState("");
@@ -19,33 +26,43 @@ function App() {
   //  navigate('/login', { replace: true })
  // }
 
-  /*useEffect(() => {
-    setIsLoading(true);  
+  useEffect(() => {
+    setIsLoading(true); 
+    setTracksError(null); 
     getTracks()
-      .then((musicTracks) => setMusicTracks(musicTracks.musicTracks));
-    setIsLoading(false); 
+      .then((tracks) => setTracks(tracks))
+      .catch((error) => {
+        setTracksError(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
       
-  }, []);*/
+  }, []);
   
   return (
+    <>
     <div className="App">
       <div className="App-layout">
-        <AppRoutes  
-          //musicTracks={musicTracks}
-          //isLoading={isLoading}
-          user={user}
-          setUser={setUser}
-          //email={email}
-          //setEmail={setEmail}
-          //username={username}
-          //setUsername={setUsername}
-          //password={password}
-          //setPassword={setPassword}
-          //repeatPassword={repeatPassword}
-          //setRepeatPassword={setRepeatPassword}
-           />
+      <UserContext.Provider value={user}>
+            <AppRoutes
+              isLoading={isLoading}
+              tracks={tracks}
+              setCurrentTrack={setCurrentTrack}
+              user={user}
+              setUser={setUser}
+              tracksError={tracksError}
+            />
+          </UserContext.Provider>
       </div>
     </div>
+      {currentTrack ? (
+        <AudioPlayer
+          currentTrack={currentTrack}
+          setCurrentTrack={setCurrentTrack}
+        />
+      ) : null}
+    </>
   );
 }
 

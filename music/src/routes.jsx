@@ -45,7 +45,7 @@ export const AppRoutes = ({ user, setUser}) => {
         path="/"
         element={
           <ProtectedRoute user={user} isAllowed={Boolean(user)}>
-            <MainPage />
+            <MainPage user={user} />
           </ProtectedRoute>
         }
       />
@@ -54,7 +54,7 @@ export const AppRoutes = ({ user, setUser}) => {
         path="/main"
         element={
           <ProtectedRoute user={user} isAllowed={Boolean(user)}>
-            <MainPage />
+            <MainPage user={user} />
           </ProtectedRoute>
         }
       />

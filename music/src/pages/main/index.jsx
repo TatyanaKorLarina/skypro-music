@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-
+import { SideBarPersonal } from "../../components/SideBarPersonal/SideBarPersonal";
 import AudioPlayer from '../../components/audioPlayer/AudioPlayer';
 import NavMenu from '../../components/navMenu/NavMenu';
 import Tracklist from '../../components/tracklist/Tracklist';
 import Sidebar from '../../components/sidebar/Sidebar';
+import { UserContext } from "../../contexts/user.jsx";
 
 import { getTracks } from '../../api';
 import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkeleton'
@@ -50,14 +51,14 @@ export const MainPage = ({ categories }) => {
                       placeholder="Поиск"
                       name="search"
                     />
-                    <S.SidebarPersonal>
-                      <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
-                      <S.SidebarIcon>
-                        <S.Logout alt="logout">
-                          <use xlinkHref="img/icon/sprite.svg#logout" />
-                        </S.Logout>
-                      </S.SidebarIcon>
-                    </S.SidebarPersonal>
+                    <UserContext.Consumer>
+                      {(user) => (
+                        <SideBarPersonal
+                          isLoading={isLoading}
+                          user={user}
+                        />
+                      )}
+                    </UserContext.Consumer>
                   </S.CenterblockSearch>
                   <S.CenterblockH2>Треки</S.CenterblockH2>
                   <Filter />

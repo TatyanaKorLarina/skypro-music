@@ -19,7 +19,7 @@ export function AuthPage({ isLoginMode = false }) {
     setError("Неизвестная ошибка регистрации");
   };
 
-  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
+  
   useEffect(() => {
     setError(null);
   }, [isLoginMode, email, password, repeatPassword]);

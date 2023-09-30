@@ -14,6 +14,7 @@ export const LoginPage = ({
   const [repeatPassword, setRepeatPassword] = useState("");
   const [textError, setTextError] = useState(null);
   const navigate = useNavigate();
+  const navigateAuth = useNavigate();
   useEffect(() => {
     setTextError(null);
   }, [isLoginMode, email, password, repeatPassword]);
@@ -31,7 +32,7 @@ export const LoginPage = ({
       navigate("/");
       setTextError("");
     }
-    };
+  };
 
     const handleAuth = async (event) => {
       event.preventDefault();
@@ -53,15 +54,16 @@ export const LoginPage = ({
       username: username,
       email: email,
       password: password,
-    }).then((obj) => {
-      if (obj.status === 400) {
-        const errorMail = obj.data.email;
-        const errorUser = obj.data.username;
-        const ErrorPassword = obj.data.password;
+    }).then((object) => {
+      if (object.status === 400) {
+        const errorMail = object.data.email;
+        const errorUser = object.data.username;
+        const ErrorPassword = object.data.password;
 
         setTextError(errorMail + errorUser + ErrorPassword);
       }
-      setUser(obj.data.username);
+      setUser(object.data.username);
+      navigateAuth("/login");
     });
   };
 

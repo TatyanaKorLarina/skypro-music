@@ -64,7 +64,7 @@ export const MainCenterblock = styled.div`
 `
 
 export const CenterblockSearch = styled.div`
-  width: 100%;
+  
   border-bottom: 1px solid #4e4e4e;
   margin-bottom: 51px;
   display: -webkit-box;
