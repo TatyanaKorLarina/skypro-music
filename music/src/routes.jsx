@@ -8,7 +8,8 @@ import { LoginPage } from "./pages/login/LoginPage";
 import { ProtectedRoute } from './components/protected-route';
 
 
-export const AppRoutes = ({ user, setUser, email, setEmail, password, setPassword, repeatPassword,
+export const AppRoutes = ({ user, setUser, email, setEmail, username,
+  setUsername, password, setPassword, repeatPassword,
   setRepeatPassword }) => {
   return (
     <Routes>
@@ -33,6 +34,8 @@ export const AppRoutes = ({ user, setUser, email, setEmail, password, setPasswor
             isLoginMode={false}
             email={email}
             setEmail={setEmail}
+            username={username}
+            setUsername={setUsername}
             password={password}
             setPassword={setPassword}
             user={user}

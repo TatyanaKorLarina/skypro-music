@@ -1,60 +1,98 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./LoginPage.styles";
-import { fetchLogin } from "../../api";
-import { useState } from "react";
+import { fetchLogin, fetchReg } from "../../api";
+import { useState, useEffect } from "react";
 
 export const LoginPage = ({
   isLoginMode = false,
   email,
   setEmail,
+  username,
+  setUsername,
   password,
   setPassword,
   repeatPassword,
   setRepeatPassword,
   user,
-  setUser,
+  setUser
 }) => {
   const [textError, setTextError] = useState(null);
   const navigate = useNavigate();
-  const handleRegister = async () => {
-    alert(`Выполняется регистрация: ${email} ${password}`);
-  };
-
-
-  const LogReg = async () => {
-    fetchLogin(email, password)
+  useEffect(() => {
+    setTextError(null);
+  }, [isLoginMode, email, password, repeatPassword]);
+  
+  const getAuth = async () => {
+    fetchLogin({ email: email, password: password })
       .then((response) => {
         setUser(response.username); 
       })
       .catch((error) => {
         setTextError(error.message);
+      
       });
-
     if (user) {
       navigate("/");
       setTextError("");
     }
-  };
+    };
 
-  const handleAuth = async (event) => {
-    event.preventDefault();
+    const handleAuth = async (event) => {
+      event.preventDefault();
+      if (!email) {
+        setTextError("Введите логин");
+        return;
+      }
+      if (!password) {
+        setTextError("Введите пароль");
+        return;
+      }
+
+    getAuth();
+    };
+
+
+  const getReg = async () => {
+    fetchReg({
+      username: username,
+      email: email,
+      password: password,
+    })
+      .then((response) => {
+        setUser(response.username);
+      })
+      .catch((error) => {
+        setTextError(error.message);
+      });
+    if (username) {
+      navigate("/");
+      setTextError("");
+    }
+  };
+  console.log(user);
+
+  const handleRegister = async () => {
     if (!email) {
+      setTextError("Введите почту");
+      return;
+    }
+    if (!username) {
       setTextError("Введите логин");
       return;
     }
-
     if (!password) {
       setTextError("Введите пароль");
       return;
     }
-    if (!repeatPassword && isLoginMode === false) {
+    if (!repeatPassword) {
       setTextError("Повторите пароль");
       return;
     }
-
-    LogReg();
-
-    
+    if (password !== repeatPassword) {
+      setTextError("Повторите корректный пароль");
+      return;
+    }
+    getReg();
   };
 
   return (
@@ -110,6 +148,15 @@ export const LoginPage = ({
                 value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
+                }}
+              />
+              <S.ModalInput
+                type="text"
+                name="login"
+                placeholder="Логин"
+                value={username}
+                onChange={(event) => {
+                  setUsername(event.target.value);
                 }}
               />
               <S.ModalInput

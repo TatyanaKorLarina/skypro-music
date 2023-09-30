@@ -14,7 +14,7 @@ export async function getTracks() {
     return data;
   }
 
-  export async function fetchLogin(email, password) {
+  export async function fetchLogin({ email, password }) {
     return fetch("https://skypro-music-api.skyeng.tech/user/login/", {
       method: "POST",
       body: JSON.stringify({
@@ -22,7 +22,6 @@ export async function getTracks() {
         password,
       }),
       headers: {
-        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
         "content-type": "application/json",
       },
     }).then((response) => {
@@ -31,6 +30,25 @@ export async function getTracks() {
       }
       if (response.status === 401) {
         throw new Error("Пользователь с таким email или паролем не найден");
+      }
+      return response.json();
+    });
+  };
+
+  export async function fetchReg({ username, email, password }) {
+    return fetch("https://skypro-music-api.skyeng.tech/user/signup/", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((response) => {
+      if (response.status === 400) {
+        throw new Error("Ошибка входа");
       }
       return response.json();
     });
