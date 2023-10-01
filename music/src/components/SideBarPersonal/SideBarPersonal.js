@@ -1,15 +1,15 @@
 //import React from "react";
 import * as S from "./SideBarPersonal.styles.js";
 
-export function SideBarPersonal({ loading, user }) {
+export function SideBarPersonal({ loading, user, switchUser }) {
   return (
     <S.SidebarPersonal>
       {loading ? (
-        <S.SidebarPersonalName>User</S.SidebarPersonalName>
+        <S.SidebarPersonalName>{loading}</S.SidebarPersonalName>
       ) : (
         <S.SidebarPersonalName>{user}</S.SidebarPersonalName>
       )}
-      <S.SidebarIcon>
+      <S.SidebarIcon onClick={switchUser}>
         <svg alt="logout">
           <use xlinkHref="img/icon/sprite.svg#logout"></use>
         </svg>

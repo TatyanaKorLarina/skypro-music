@@ -32,3 +32,59 @@ export const SidebarList = styled.div`
   -ms-flex-align: center;
   align-items: center;
 `
+
+export const SidebarLink = styled.div`
+  width: 100%;
+  height: 100%;
+`
+
+export const SidebarItem = styled.div`
+  width: 250px;
+  height: 150px;
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+`
+export const SidebarIcon = styled.div`
+  width: 43px;
+  height: 43px;
+  background-color: #313131;
+  border-radius: 50%;
+  cursor: pointer;
+`
+
+export const SidebarImg = styled.img`
+  width: 100%;
+  height: auto;
+`
+
+export const Logout = styled.svg`
+  width: 43px;
+  height: 43px;
+`
+
+export const SidebarPersonalName = styled.p`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  margin-right: 16px;
+`
+
+export const SidebarPersonal = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 12px 0 15px 0;
+`
