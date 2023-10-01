@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 import { useLogin } from "../../contexts/user.jsx";
 
 //import { SideBarPersonal } from "../SideBarPersonal/SideBarPersonal";
@@ -8,25 +8,16 @@ import { useLogin } from "../../contexts/user.jsx";
 import * as S from './Sidebar.styles'
 export const categories = [1, 2, 3]
 export default function Sidebar() {
-  const navigate = useNavigate()
-  const { logUser, setLogUser, setIsLogin } = useLogin()
-  const handleLogout = () => {
-    localStorage.clear()
-    setIsLogin(false)
-    setLogUser(null)
-    navigate('/login', { replace: true })
-  }
+  //const navigate = useNavigate()
+  const { logUser } = useLogin()
+  
 
 
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>{logUser}</S.SidebarPersonalName>
-        <S.SidebarIcon>
-          <S.Logout onClick={handleLogout} alt="logout">
-            <use xlinkHref="img/icon/sprite.svg#logout"></use>
-          </S.Logout>
-        </S.SidebarIcon>
+        
       </S.SidebarPersonal>
       <S.SidebarBlock>
         <S.SidebarList>
