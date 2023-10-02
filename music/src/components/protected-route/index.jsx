@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom'
-
-export const ProtectedRoute = ({ children, redirectPath = "/login", user }) => {
-  console.log(user);
-  if (!user) {
+import { useAuth } from "../../WithAuth";
+export const ProtectedRoute = ({ children, redirectPath = "/login" }) => {
+  const { auth } = useAuth();
+  if (!auth) {
     return <Navigate to={redirectPath} replace={true} />
   }
 

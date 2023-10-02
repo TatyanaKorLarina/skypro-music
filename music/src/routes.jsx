@@ -8,7 +8,7 @@ import { LoginPage } from "./pages/login/LoginPage";
 import { ProtectedRoute } from './components/protected-route';
 
 
-export const AppRoutes = ({ user, setUser}) => {
+export const AppRoutes = ({ user, setUser }) => {
   return (
     <Routes>
       <Route

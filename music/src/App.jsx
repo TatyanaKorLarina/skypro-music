@@ -3,15 +3,15 @@ import { useState, useEffect } from "react";
 //import { useNavigate } from "react-router-dom";
 import "./App.styles";
 import AudioPlayer from "./components/audioPlayer/AudioPlayer"
-import { UserContext } from "./contexts/user";
+//import { UserContext } from "./contexts/user";
 import { getTracks } from "./api";
-
+import { WithAuth } from "./WithAuth";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
-  const [user, setUser] = useState(null);
+  //const [user, setUser] = useState(null);
   //const [email, setEmail] = useState("");
   //const [username, setUsername] = useState("");
   //const [password, setPassword] = useState("");
@@ -42,28 +42,26 @@ function App() {
   
   return (
     <>
-    <div className="App">
-      <div className="App-layout">
-      <UserContext.Provider value={user}>
+    <WithAuth>
+        <div className="App">
+          <div>
             <AppRoutes
-              isLoading={isLoading}
-              tracks={tracks}
+              loading={isLoading}
+              allTracks={tracks}
               setCurrentTrack={setCurrentTrack}
-              user={user}
-              setUser={setUser}
-              tracksError={tracksError}
+              getAllTracksError={tracksError}
             />
-          </UserContext.Provider>
-      </div>
-    </div>
-      {currentTrack ? (
-        <AudioPlayer
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
-        />
-      ) : null}
-    </>
-  );
-}
+          </div>
+        </div>
+        {currentTrack ? (
+          <AudioPlayer
+            currentTrack={currentTrack}
+            setCurrentTrack={setCurrentTrack}
+          />
+          ) : null}
+        </WithAuth>
+      </>
+    );
+  }
 
 export default App;

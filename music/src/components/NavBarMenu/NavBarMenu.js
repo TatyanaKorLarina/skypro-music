@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import * as S from "./NavBarMenu.styles.js";
 import { NavBarItem } from "../NavBarItem/NavBarItem";
-
-export function NavBarMenu({ switchUser }) {
+import { useAuth } from "../../WithAuth.jsx";
+export function NavBarMenu() {
+  const { logout } = useAuth();
   return (
     <S.NavMenu>
       <S.MenuList>
@@ -13,7 +14,7 @@ export function NavBarMenu({ switchUser }) {
           <NavBarItem menuName="Мой плейлист" />
         </NavLink>
         <NavLink
-          onClick={switchUser}
+          onClick={logout}
           to="/login"
         >
           <NavBarItem menuName="Выйти" />
