@@ -1,20 +1,21 @@
 import { AppRoutes } from "./routes";
 import { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import "./App.styles";
 //import { getTracks } from "./api";
 function App() {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   //const [musicTracks, setMusicTracks] = useState([]);
   //const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const handleLogin = () => setUser(localStorage.setItem('user', 'token'))
-  const handleLogout = () => {
-    setUser(localStorage.clear())
-    navigate('/login', { replace: true })
-  }
+  //const navigate = useNavigate();
+  //const handleLogin = () => setUser(localStorage.setItem('user', 'token'))
+  //const handleLogout = () => {
+    //setUser(localStorage.clear())
+    //navigate('/login', { replace: true })
+  //}
   /*useEffect(() => {
     setIsLoading(true);  
     getTracks()
@@ -30,11 +31,13 @@ function App() {
           //musicTracks={musicTracks}
           //isLoading={isLoading}
           user={user}
+          setUser={setUser}
           email={email}
           setEmail={setEmail}
           password={password}
           setPassword={setPassword}
-          onAuthButtonClick={user ? handleLogout : handleLogin} />
+          repeatPassword={repeatPassword}
+          setRepeatPassword={setRepeatPassword} />
       </div>
     </div>
   );

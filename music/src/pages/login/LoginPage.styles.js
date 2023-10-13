@@ -1,40 +1,31 @@
 import styled from "styled-components";
 
-export const LoginWrap = styled.div`
-  width: 100%;
-  min-height: 100%;
-  overflow: hidden;
-`;
-export const LoginContainer = styled.div`
+export const PageContainer = styled.div`
   max-width: 100%;
   height: 100vh;
-  margin: 0 auto;
-  position: relative;
   background-color: rgba(0, 0, 0, 0.85);
 `;
-export const LoginBtnEnter = styled.button`
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   width: 278px;
   height: 52px;
-  background-color: #580ea2;
   border-radius: 6px;
-  margin-top: 60px;
-  margin-bottom: 20px;
   border: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-  letter-spacing: -0.05px;
+  &:disabled {
+    background-color: #303030;
+  }
+`;
+
+export const PrimaryButton = styled(Button)`
   color: #ffffff;
+  background-color: #580ea2;
   &:hover {
     background-color: #3f007d;
   }
@@ -42,27 +33,10 @@ export const LoginBtnEnter = styled.button`
     background-color: #271a58;
   }
 `;
-export const LoginBtnSignup = styled.button`
-  width: 278px;
-  height: 52px;
+export const SecondaryButton = styled(Button)`
+  color: #000000;
   background-color: transparent;
   border: 1px solid #d0cece;
-  border-radius: 6px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.05px;
-  color: #000000;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   &:hover {
     background-color: #f4f5f6;
   }
@@ -77,25 +51,18 @@ export const LoginModalBlock = styled.div`
   top: calc(50% - (439px / 2));
   opacity: 1;
 `;
-export const LoginModalFormLogin = styled.form`
-  width: 366px;
-  height: 439px;
+export const ModalForm = styled.div`
+  --modal-width: 366px;
+  --modal-height: 439px;
+  position: absolute;
+  left: calc(50% - (var(--modal-width) / 2));
+  top: calc(50% - (var(--modal-height) / 2));
+  box-sizing: border-box;
+  width: var(--modal-width);
+  min-height: var(--modal-height);
   background-color: #ffffff;
   border-radius: 12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   padding: 43px 47px 47px 40px;
-  &:first-child {
-    margin-bottom: 30px;
-  }
 `;
 export const LoginModalLogo = styled.div`
   width: 140px;
@@ -107,7 +74,7 @@ export const LoginModalLogoImg = styled.img`
   width: 140px;
   height: auto;
 `;
-export const LoginModalInput = styled.input`
+export const ModalInput = styled.input`
   width: 100%;
   border-top: none;
   border-left: none;
@@ -146,6 +113,29 @@ export const LoginModalInput = styled.input`
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-	color: #d0cece;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #d0cece;
   }
+`;
+export const Inputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+`;
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 60px;
+  width: 100%;
+`;
+export const LoginError = styled.div`
+  color: coral;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 20px;
+  text-align: left;
 `;
