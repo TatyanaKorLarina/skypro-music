@@ -1,6 +1,10 @@
 import './register.css'
+import { useState } from 'react'
+import { registerUser } from '../../api'
 
 export const RegisterPage = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   return (
     // <div>
     //   <h1>RegisterPage</h1>
@@ -20,12 +24,16 @@ export const RegisterPage = () => {
               type="text"
               name="login"
               placeholder="Почта"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               className="modal__input password-first"
               type="password"
               name="password"
               placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <input
               className="modal__input password-double"
@@ -33,8 +41,13 @@ export const RegisterPage = () => {
               name="password"
               placeholder="Повторите пароль"
             />
-            <button className="modal__btn-signup-ent">
-              <a href="../index.html">Зарегистрироваться</a>
+            <button
+              onClick={() => {
+                registerUser(email, password)
+              }}
+              className="modal__btn-signup-ent"
+            >
+              <a>Зарегистрироваться</a>
             </button>
           </form>
         </div>
