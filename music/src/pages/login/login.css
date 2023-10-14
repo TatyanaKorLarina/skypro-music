@@ -193,7 +193,7 @@
     justify-content: center;
   }
   
-  .modal__btn-enter a {
+  .modal__btn-enter {
     width: 100%;
     height: 100%;
     font-style: normal;
@@ -213,7 +213,7 @@
     justify-content: center;
   }
   
-  .modal__btn-signup {
+ /* .modal__btn-signup {
     width: 278px;
     height: 52px;
     background-color: transparent;
@@ -254,7 +254,7 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-  }
+  }*/
   
   .login {
     margin-bottom: 30px;
