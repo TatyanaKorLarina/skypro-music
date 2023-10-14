@@ -6,6 +6,7 @@ import Playlist, { categories } from '../playlist/Playlist';
 import * as S from './Sidebar.styles'
 
 export default function Sidebar() {
+  
   return (
     <S.MainSidebar>
             

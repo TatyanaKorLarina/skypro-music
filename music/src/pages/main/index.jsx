@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 import AudioPlayer from '../../components/audioPlayer/AudioPlayer';
 import NavMenu from '../../components/navMenu/NavMenu';
 import Tracklist from '../../components/tracklist/Tracklist';
@@ -18,6 +18,11 @@ export const MainPage = ({ categories }) => {
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
   const [currentTrack, setCurrentTrack] = useState(null)
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.clear()
+    navigate('/login', { replace: true })
+  }
   useEffect(() => {
     getTracks()
       .then((tracks) => {
@@ -53,7 +58,7 @@ export const MainPage = ({ categories }) => {
                     <S.SidebarPersonal>
                       <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
                       <S.SidebarIcon>
-                        <S.Logout alt="logout">
+                      <S.Logout onClick={logout} alt="logout">
                           <use xlinkHref="img/icon/sprite.svg#logout" />
                         </S.Logout>
                       </S.SidebarIcon>
