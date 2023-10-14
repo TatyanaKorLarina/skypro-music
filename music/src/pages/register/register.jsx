@@ -10,6 +10,7 @@ export const RegisterPage = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const validateForm = () => password === confirmPassword
   const setUser = (user, token) => {
     localStorage.setItem(user, token)
@@ -17,16 +18,20 @@ export const RegisterPage = () => {
   }
   const handleSubmit = (event) => {
     event.preventDefault()
+    setLoading(true)
     const valForm = validateForm()
     if (valForm) {
       setError(null)
       console.log('submit')
       registerUser(email, password)
         .then(() => {
-          getToken(email, password).then((res) => setUser('user', res.access))
+          getToken(email, password)
+            .then((res) => setUser('user', res.access))
+            .then(() => setLoading(false))
         })
         .catch((error) => {
           setError(error.message)
+          setLoading(false)
           console.log(error.message)
         })
   } else {
@@ -77,7 +82,7 @@ export const RegisterPage = () => {
               )}
               {errorDiv}
             </div>
-            <button className="modal__btn-signup-ent">
+            <button disabled={loading} className="modal__btn-signup-ent">
               Зарегистрироваться
             </button>
             {/* </Link> */}
