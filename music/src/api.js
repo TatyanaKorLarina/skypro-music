@@ -14,8 +14,8 @@ export async function getTracks() {
     return data;
   }
 
-  export const registerUser = (email, password) => {
-    const promise = fetch('https://skypro-music-api.skyeng.tech/user/signup/', {
+  export const registerUser = async (email, password) => {
+    const response = await fetch('https://skypro-music-api.skyeng.tech/user/signup/', {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -25,6 +25,18 @@ export async function getTracks() {
       headers: {
         'content-type': 'application/json',
       },
-    })
-    return promise
+    },
+    )
+
+    const data = await response.json()
+  
+    if (!response.ok) {
+      console.log(data)
+      const error = data.email?.[0] ?? data.username?.[0] ?? data.password?.[0]
+      console.log(error)
+      throw new Error(error)
+    } else {
+      console.log(data)
+      return data
+    }
   }

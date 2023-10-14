@@ -209,4 +209,9 @@
 
   .error {
     color: red;
+    font-size: xx-small;
+  }
+
+  .possibleError {
+    height: 30px;
   }
