@@ -1,25 +1,34 @@
 import './register.css'
 import { useState } from 'react'
-import { registerUser } from '../../api'
+import { registerUser, getToken } from '../../api'
+import { useNavigate } from 'react-router-dom'
 //import { useNavigate, Link } from 'react-router-dom'
 
 export const RegisterPage = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState('')
   const validateForm = () => password === confirmPassword
-  //const errorDiv = error ? <div className="error">{error}</div> : ''
+  const setUser = (user, token) => {
+    localStorage.setItem(user, token)
+    navigate('/', { replace: true })
+  }
   const handleSubmit = (event) => {
     event.preventDefault()
     const valForm = validateForm()
     if (valForm) {
       setError(null)
       console.log('submit')
-      registerUser(email, password).catch((error) => {
-        setError(error.message)
-        console.log(error.message)
-    })
+      registerUser(email, password)
+        .then(() => {
+          getToken(email, password).then((res) => setUser('user', res.access))
+        })
+        .catch((error) => {
+          setError(error.message)
+          console.log(error.message)
+        })
   } else {
     event.preventDefault()
   }
