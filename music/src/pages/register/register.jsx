@@ -2,7 +2,8 @@ import './register.css'
 import { useState } from 'react'
 import { registerUser, getToken } from '../../api'
 import { useNavigate } from 'react-router-dom'
-//import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '../../Contexts/AuthContext'
+
 
 export const RegisterPage = () => {
   const navigate = useNavigate()
@@ -11,7 +12,10 @@ export const RegisterPage = () => {
   const [error, setError] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const validateForm = () => password === confirmPassword
+  const checkForm = () => password === confirmPassword
+  const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
+  console.log (authUser)
+  console.log (isLogIn)
   const setUser = (user, token) => {
     localStorage.setItem(user, token)
     navigate('/', { replace: true })
@@ -19,14 +23,19 @@ export const RegisterPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     setLoading(true)
-    const valForm = validateForm()
+    const valForm = checkForm()
     if (valForm) {
       setError(null)
       console.log('submit')
       registerUser(email, password)
         .then(() => {
           getToken(email, password)
-            .then((res) => setUser('user', res.access))
+          .then((res) => {
+            setUser('user', res.access)
+            setIsLogIn(true)
+           
+            setAuthUser(email)
+          })
             .then(() => setLoading(false))
         })
         .catch((error) => {
@@ -40,9 +49,7 @@ export const RegisterPage = () => {
   }
   const errorDiv = error ? <div className="error">{error}</div> : ''
   return (
-    // <div>
-    //   <h1>RegisterPage</h1>
-    // </div>
+   
 
     <div className="wrapper">
       <div className="container-signup">
@@ -77,7 +84,7 @@ export const RegisterPage = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <div className="possibleError">
-              {!validateForm() && (
+              {!checkForm() && (
                 <p className="error">Введенные пароли не совпадают</p>
               )}
               {errorDiv}

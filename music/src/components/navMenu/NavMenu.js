@@ -3,6 +3,7 @@ import React from 'react'
 import * as S from './NavMenu.styles'
 import { useNavigate } from 'react-router-dom'
 const { useState } = React
+import { useAuth } from '../../Contexts/AuthContext'
 
 
 
@@ -11,9 +12,14 @@ function NavMenu() {
 
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
+  const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
+  console.log (authUser)
+  console.log (isLogIn)
   const handleLogin = () => setUser(localStorage.setItem('user', 'token'))
   const handleLogout = () => {
     setUser(localStorage.clear())
+    setIsLogIn(false)
+    setAuthUser(null)
     navigate('/login', { replace: true })
   }
 

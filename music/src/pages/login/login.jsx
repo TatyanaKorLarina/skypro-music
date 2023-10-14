@@ -1,18 +1,26 @@
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { loginUser, getToken } from '../../api'
+import { useAuth } from '../../Contexts/AuthContext'
 import './login.css'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
-  const setUser = (user, token) => {
-    localStorage.setItem(user, token)
-    navigate('/', { replace: true })
-  }
+ 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+
+
+  const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
+  
+  console.log (authUser)
+  console.log (isLogIn)
+  const setUser = (user, token) => {
+    localStorage.setItem(user, token)
+    navigate('/', { replace: true })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -26,6 +34,9 @@ export const LoginPage = () => {
     getToken(email, password)
     .then((res) => {
       setUser('user', res.access)
+      setIsLogIn(true)
+        
+        setAuthUser(email)
       setLoading(false)
     })
       .catch((error) => {
