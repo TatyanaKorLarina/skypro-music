@@ -4,7 +4,7 @@ import { CategoryPage } from "./pages/category";
 import { FavoritesPage } from "./pages/favorites";
 import { NotFoundPage } from "./pages/not-found";
 import { LoginPage } from "./pages/login/login";
-import { RegisterPage } from "./pages/register";
+import { RegisterPage } from "./pages/register/register";
 import { ProtectedRoute } from './components/protected-route';
 
 
