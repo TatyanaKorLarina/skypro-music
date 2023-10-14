@@ -6,10 +6,26 @@ import { registerUser } from '../../api'
 export const RegisterPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
+  const errorDiv = error ? <div className="error">{error}</div> : ''
   const handleSubmit = (event) => {
     event.preventDefault()
+    setError(null)
     console.log('submit')
     registerUser(email, password)
+    .then((response) => {
+      if (response.status === 400) {
+        setError(response.error)
+        console.log(error) //null
+        throw new Error('Такой пользователь уже существует')
+      }
+      return response.json()
+    })
+    .then((json) => console.log(json))
+    .then(() => console.log('API регистрации сработало'))
+  // .catch((err) => {
+  //   setError(err.message)
+  // })
   }
   return (
     // <div>
@@ -52,6 +68,7 @@ export const RegisterPage = () => {
             </button>
             {/* </Link> */}
           </form>
+          {errorDiv}
         </div>
       </div>
     </div>
