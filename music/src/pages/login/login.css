@@ -26,18 +26,7 @@
   ul li {
     list-style: none;
   }
-  
-  /* @font-face {
-    font-family: 'StratosSkyeng';
-    src:
-      local('StratosSkyeng'),
-      local('StratosSkyeng'),
-      url('../fonts/StratosSkyeng.woff2') format('woff2'),
-      url('../fonts/StratosSkyeng.woff') format('woff'),
-      url('../fonts/StratosSkyeng.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-  } */
+ 
   
   @font-face {
     font-family: 'StratosSkyeng';
@@ -213,48 +202,7 @@
     justify-content: center;
   }
   
- /* .modal__btn-signup {
-    width: 278px;
-    height: 52px;
-    background-color: transparent;
-    border: 1px solid #d0cece;
-    border-radius: 6px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.05px;
-    color: #000000;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-  
-  .modal__btn-signup a {
-    width: 100%;
-    height: 100%;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.05px;
-    color: #000000;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }*/
+ 
   
   .login {
     margin-bottom: 30px;
