@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { registerUser, getToken } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../Contexts/AuthContext'
-
+import * as S from './register.styles'
 
 export const RegisterPage = () => {
   const navigate = useNavigate()
@@ -51,52 +51,49 @@ export const RegisterPage = () => {
   return (
    
 
-    <div className="wrapper">
-      <div className="container-signup">
-        <div className="modal__block">
+    <S.Wrapper>
+      <S.ContainerSignup>
+        <S.ModalBlock>
           
-          <form className="modal__form-login" onSubmit={handleSubmit}>
-            <div className="modal__logo">
+          <S.ModalFormLogin onSubmit={handleSubmit}>
+            <S.ModalLogo>
               <img src="../img/logo_modal.png" alt="logo" />
-            </div>
-            <input
-              className="modal__input login"
+            </S.ModalLogo>
+            <S.ModalInputLogin
               type="text"
               name="login"
               placeholder="Почта"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-              className="modal__input password-first"
+            <S.ModalInputPassword
               type="password"
               name="password"
               placeholder="Пароль"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <input
-              className="modal__input password-double"
+            <S.ModalInputPassword
               type="password"
               name="password"
               placeholder="Повторите пароль"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <div className="possibleError">
+            <S.PossibleError>
               {!checkForm() && (
-                <p className="error">Введенные пароли не совпадают</p>
+                <S.Error>Введенные пароли не совпадают</S.Error>
               )}
               {errorDiv}
-            </div>
-            <button disabled={loading} className="modal__btn-signup-ent">
+            </S.PossibleError>
+            <S.ModalBtnSignupEnt disabled={loading}>
               Зарегистрироваться
-            </button>
+            </S.ModalBtnSignupEnt>
             {/* </Link> */}
-          </form>
+          </S.ModalFormLogin>
           {errorDiv}
-        </div>
-      </div>
-    </div>
+        </S.ModalBlock>
+      </S.ContainerSignup>
+    </S.Wrapper>
   )
 }

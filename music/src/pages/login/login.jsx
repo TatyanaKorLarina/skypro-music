@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { loginUser, getToken } from '../../api'
 import { useAuth } from '../../Contexts/AuthContext'
 import './login.css'
-
+import * as S from './login.styles'
 export const LoginPage = () => {
   const navigate = useNavigate()
  
@@ -49,39 +49,37 @@ export const LoginPage = () => {
   const errorDiv = error ? <div className="error">{error}</div> : ''
   return (
 
-    <div className="wrapper">
-      <div className="container-enter">
-        <div className="modal__block">
-        <form className="modal__form-login" onSubmit={handleSubmit}>
-          <div className="modal__logo">
+    <S.Wrapper>
+      <S.ContainerEnter>
+        <S.ModalBlock>
+        <S.ModalFormLogin onSubmit={handleSubmit}>
+          <S.ModalLogo>
               <img src="../img/logo_modal.png" alt="logo" />
-            </div>
-            <input
-              className="modal__input login"
+            </S.ModalLogo>
+            <S.ModalInputLogin
               type="text"
               name="login"
               placeholder="Почта"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-              className="modal__input password"
+            <S.ModalInputPassword
               type="password"
               name="password"
               placeholder="Пароль"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div className="possibleError">{errorDiv}</div>
-            <button disabled={loading} className="modal__btn-enter">
+            <S.PossibleError>{errorDiv}</S.PossibleError>
+            <S.ModalBtnEnter disabled={loading}>
               Войти
-            </button>
+            </S.ModalBtnEnter>
             <Link to="/register">
-              <button className="modal__btn-signup">Зарегистрироваться</button>
+              <S.ModalBtnSignup>Зарегистрироваться</S.ModalBtnSignup>
             </Link>
-          </form>
-        </div>
-      </div>
-    </div>
+          </S.ModalFormLogin>
+        </S.ModalBlock>
+      </S.ContainerEnter>
+    </S.Wrapper>
   )
 }
