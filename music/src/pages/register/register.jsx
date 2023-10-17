@@ -20,7 +20,7 @@ export const RegisterPage = () => {
     localStorage.setItem(user, token)
     navigate('/', { replace: true })
   }
-  const handleSubmit = (event) => {
+  /*const handleSubmit = (event) => {
     event.preventDefault()
     setLoading(true)
     const valForm = checkForm()
@@ -46,7 +46,37 @@ export const RegisterPage = () => {
   } else {
     event.preventDefault()
   }
+  }*/
+  console.log(setUser)
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault()
+      setLoading(true)
+      setError(null)
+  
+      const userRes = await registerUser(email, password)
+      const tokenRes = await getToken(email, password)
+
+      const userData = {...userRes, ...tokenRes}
+      console.log (userData)
+
+      setAuthUser(userData)
+      localStorage.setItem("user", JSON.stringify(userData))
+
+      setIsLogIn(true)
+      navigate('/', { replace: true})
+    } catch (error) {
+        setError(error.message)
+        console.log(error.message)
+    } finally {
+        setLoading(false)
+    }
+    
+    
+    
   }
+
+
   const errorDiv = error ? <div className="error">{error}</div> : ''
   return (
    
