@@ -21,30 +21,35 @@ export const LoginPage = () => {
     localStorage.setItem(user, token)
     navigate('/', { replace: true })
   }
+  console.log (setUser)
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault()
+      setLoading(true)
+      setError(null)
+  
+      const userRes = await loginUser(email, password)
+      const tokenRes = await getToken(email, password)
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    setLoading(true)
-    setError(null)
-    console.log('submited form')
-    loginUser(email, password).catch((error) => {
-      setError(error.message)
-      console.log(error.message)
-    })
-    getToken(email, password)
-    .then((res) => {
-      setUser('user', res.access)
+      const userData = {...userRes, ...tokenRes}
+      console.log (userData)
+
+      setAuthUser(userData)
+      localStorage.setItem("user", JSON.stringify(userData))
+
       setIsLogIn(true)
-        
-        setAuthUser(email)
-      setLoading(false)
-    })
-      .catch((error) => {
+      navigate('/', { replace: true})
+    } catch (error) {
         setError(error.message)
-        setLoading(false)
         console.log(error.message)
-      })
+    } finally {
+        setLoading(false)
+    }
+    
+    
+    
   }
+
 
   const errorDiv = error ? <div className="error">{error}</div> : ''
   return (

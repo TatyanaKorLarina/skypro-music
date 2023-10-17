@@ -60,7 +60,7 @@ export const MainPage = ({ categories }) => {
                       name="search"
                     />
                     <S.SidebarPersonal>
-                    <S.SidebarPersonalName>{authUser}</S.SidebarPersonalName>
+                    <S.SidebarPersonalName>{authUser.email}</S.SidebarPersonalName>
                       <S.SidebarIcon>
                       <S.Logout onClick={logout} alt="logout">
                           <use xlinkHref="img/icon/sprite.svg#logout" />

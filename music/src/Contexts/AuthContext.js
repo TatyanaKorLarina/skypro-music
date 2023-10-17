@@ -6,8 +6,18 @@ export function useAuth() {
   return useContext(AuthContext)
 }
 
+function getAuthFromLocalStorage () {
+  try {
+    return JSON.parse(localStorage.getItem("user"))
+
+  } catch (error) {
+    console.error (error)
+    return null
+  }
+}
+
 export function AuthProvider(props) {
-  const [authUser, setAuthUser] = useState(null)
+  const [authUser, setAuthUser] = useState(getAuthFromLocalStorage)
   const [isLogIn, setIsLogIn] = useState(false)
 
   const value = {

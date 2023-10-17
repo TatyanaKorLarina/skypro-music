@@ -91,7 +91,7 @@ export const RegisterPage = () => {
             </S.ModalBtnSignupEnt>
             {/* </Link> */}
           </S.ModalFormLogin>
-          {errorDiv}
+          
         </S.ModalBlock>
       </S.ContainerSignup>
     </S.Wrapper>
