@@ -9,7 +9,7 @@ export const RegisterPage = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
+  const [error, setError] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const checkForm = () => password === confirmPassword
@@ -20,6 +20,7 @@ export const RegisterPage = () => {
     localStorage.setItem(user, token)
     navigate('/', { replace: true })
   }
+  console.log(setUser)
   /*const handleSubmit = (event) => {
     event.preventDefault()
     setLoading(true)
@@ -47,7 +48,7 @@ export const RegisterPage = () => {
     event.preventDefault()
   }
   }*/
-  console.log(setUser)
+  /*console.log(setUser)
   const handleSubmit = async (event) => {
     try {
       event.preventDefault()
@@ -74,7 +75,45 @@ export const RegisterPage = () => {
     
     
     
-  }
+  }*/
+
+  const handleSubmit = async (event) => {
+    if (!email || !password || !confirmPassword) {
+      setError("Заполните все поля");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Пароли не совпадают");
+      return;
+    }
+
+    try {
+      event.preventDefault()
+      setLoading(true)
+      setError(null)
+  
+      const userRes = await registerUser(email, password)
+      const tokenRes = await getToken(email, password)
+
+      const userData = {...userRes, ...tokenRes}
+      console.log (userData)
+
+      setAuthUser(userData)
+      localStorage.setItem("user", JSON.stringify(userData))
+
+      setIsLogIn(true)
+      navigate('/', { replace: true})
+    } catch (error) {
+        setError(error.message)
+        console.log(error.message)
+    } finally {
+        setLoading(false)
+    }
+
+    setError(""); // Сбрасываем ошибку после успешной регистрации
+  };
+
 
 
   const errorDiv = error ? <div className="error">{error}</div> : ''
