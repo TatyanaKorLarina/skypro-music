@@ -63,6 +63,7 @@ export const MenuLink = styled.div`
   font-size: 16px;
   line-height: 24px;
   text-decoration: none;
+  cursor: pointer;
   &:hover {
     text-decoration: underline
   }

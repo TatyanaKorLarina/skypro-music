@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 import AudioPlayer from '../../components/audioPlayer/AudioPlayer';
 import NavMenu from '../../components/navMenu/NavMenu';
 import Tracklist from '../../components/tracklist/Tracklist';
 import Sidebar from '../../components/sidebar/Sidebar';
-
+import { useAuth } from '../../Contexts/AuthContext'
 import { getTracks } from '../../api';
 import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkeleton'
 //import AudioPlayerSkeleton from '../../components/audioPlayerSkeleton/AudioPlayerSkeleton'
@@ -18,6 +18,15 @@ export const MainPage = ({ categories }) => {
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
   const [currentTrack, setCurrentTrack] = useState(null)
+  const navigate = useNavigate()
+  const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
+  console.log (isLogIn)
+  const logout = () => {
+    localStorage.clear()
+    setIsLogIn(false)
+    setAuthUser(null)
+    navigate('/login', { replace: true })
+  }
   useEffect(() => {
     getTracks()
       .then((tracks) => {
@@ -51,9 +60,9 @@ export const MainPage = ({ categories }) => {
                       name="search"
                     />
                     <S.SidebarPersonal>
-                      <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+                    <S.SidebarPersonalName>{authUser.email}</S.SidebarPersonalName>
                       <S.SidebarIcon>
-                        <S.Logout alt="logout">
+                      <S.Logout onClick={logout} alt="logout">
                           <use xlinkHref="img/icon/sprite.svg#logout" />
                         </S.Logout>
                       </S.SidebarIcon>
