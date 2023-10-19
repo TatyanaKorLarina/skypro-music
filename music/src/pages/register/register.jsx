@@ -78,6 +78,8 @@ export const RegisterPage = () => {
   }*/
 
   const handleSubmit = async (event) => {
+
+    event.preventDefault()
     if (!email || !password || !confirmPassword) {
       setError("Заполните все поля");
       return;
@@ -89,7 +91,7 @@ export const RegisterPage = () => {
     }
 
     try {
-      event.preventDefault()
+      
       setLoading(true)
       setError(null)
   
