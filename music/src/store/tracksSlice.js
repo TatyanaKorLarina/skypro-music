@@ -1,22 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const tracksSlice = createSlice({
-  name: "tracks",
+  name: "trcks",
   initialState: {
     
-    track: [],
+    trck: [],
+    tracklist: [],
   },
   reducers: {
-    setCurrentTrack(state, action) {
-      state.track = action.payload;
+    setCurrentAudio(state, action) {
+      state.trck[0] = {
+        trackData: action.payload,
+      }  
     },
-    nextTack(state, action) {state.track = action.payload;},
-
-    previousTrack(state, action) {state.track = action.payload;},
-    
+    setTracklist(state, action) {
+      state.tracklist = action.payload
+    },
   },
+  
 });
 
-export const { setCurrentTrack } = tracksSlice.actions;
-export const { nextTack, previousTrack } = tracksSlice.actions
+export const { setCurrentAudio, setTracklist, } = tracksSlice.actions;
+//export const { nextTack, previousTrack } = tracksSlice.actions
 export default tracksSlice.reducer;

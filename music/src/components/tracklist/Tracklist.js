@@ -2,12 +2,17 @@
 //import { getTracks } from '../../api'
 import * as S from './Traclist.styles'
 //import Track from '../track/Track';
+//import { togglePlayer } from '../../store/tracksSlice'
+//import { useSelector } from 'react-redux';
 
-
-
-function Tracklist({ tracks, currentTrack, setCurrentTrack, isPlaying,
+function Tracklist({ 
+  tracks, 
+  currentTrack, 
+  setCurrentTrack, 
+  isPlaying,
   setIsPlaying,
-  setTrackIndex, }) {
+  setTrackIndex, 
+}) {
   
   return (
     <S.ContentPlaylist> 
@@ -27,11 +32,14 @@ function Tracklist({ tracks, currentTrack, setCurrentTrack, isPlaying,
               <S.TrackTitle>
                 <S.TrackTitleImage>
                 {currentTrack === track ? (
-                    <S.PlayingDot
+                   
+                     
+                   <S.PlayingDot
                       style={{
                         animationPlayState: isPlaying ? 'running' : 'paused',
                       }}
                     ></S.PlayingDot>
+                    
                   ) : (
                     <S.TrackTitleSvg alt="music">
                       <use xlinkHref="img/icon/sprite.svg#icon-note"></use>

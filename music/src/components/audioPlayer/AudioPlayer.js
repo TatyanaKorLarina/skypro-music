@@ -19,7 +19,7 @@ export default function AudioPlayer({ currentTrack, isPlaying,
     const [repeat, setRepeat] = useState(false);
     const audioRef = useRef(null);
     const progressBarRef = useRef(null);
-    console.log (isPlaying)
+    //console.log (isPlaying)
     useEffect(() => {
       if (audioRef) {
         audioRef.current.volume = volume / 100;
@@ -29,9 +29,7 @@ export default function AudioPlayer({ currentTrack, isPlaying,
       if (playShuffle) {
         shuffled()
       } else if (trackIndex === 0) {
-        let lastTrackIndex = tracks.length - 1
-        setTrackIndex(lastTrackIndex)
-        setCurrentTrack(tracks[lastTrackIndex])
+        return
       } else {
         setTrackIndex((prev) => prev - 1)
         setCurrentTrack(tracks[trackIndex - 1])
@@ -41,8 +39,7 @@ export default function AudioPlayer({ currentTrack, isPlaying,
       if (playShuffle) {
         shuffled()
       } else if (trackIndex >= tracks.length - 1) {
-        setTrackIndex(0)
-        setCurrentTrack(tracks[0])
+        return
       } else {
         setTrackIndex((prev) => prev + 1)
         setCurrentTrack(tracks[trackIndex + 1])

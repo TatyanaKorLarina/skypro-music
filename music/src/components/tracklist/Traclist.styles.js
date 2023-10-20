@@ -168,4 +168,6 @@ export const PlayingDot = styled.div`
   display: block;
   animation: ${BubbleOut} 0.6s ease-in-out infinite both;
   animation-play-state: running;
+  
 `
+
