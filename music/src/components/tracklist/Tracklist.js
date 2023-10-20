@@ -5,13 +5,23 @@ import * as S from './Traclist.styles'
 
 
 
-function Tracklist({ tracks, setCurrentTrack }) {
+function Tracklist({ tracks, setCurrentTrack, isPlaying,
+  setIsPlaying,
+  setTrackIndex, }) {
   
   return (
     <S.ContentPlaylist> 
-      {tracks.map((track) => {
+      {tracks.map((track, index) => {
         return (
-          <S.PlaylistItem key={track.id} onClick={() => setCurrentTrack(track)}>
+          <S.PlaylistItem 
+            key={track.id} 
+            onClick={() => {
+              setCurrentTrack(track) 
+              isPlaying = true
+              setIsPlaying(isPlaying)
+              setTrackIndex(index)
+            }}
+          >
       
             <S.PlaylistTrack>
               <S.TrackTitle>

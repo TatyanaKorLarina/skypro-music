@@ -17,7 +17,7 @@ export const MainPage = ({ categories }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
-  const [currentTrack, setCurrentTrack] = useState(null)
+  const [isPlaying, setIsPlaying] = useState(false)
   const navigate = useNavigate()
   const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
   console.log (isLogIn)
@@ -41,6 +41,9 @@ export const MainPage = ({ categories }) => {
   }, [])
   //getTracks().then((tracks) => console.log(tracks));
  
+  const [trackIndex, setTrackIndex] = useState(null)
+  const [currentTrack, setCurrentTrack] = useState(tracks[0])
+
   return (
       <>
       <S.GlobalStyle />
@@ -91,14 +94,27 @@ export const MainPage = ({ categories }) => {
                     {isLoading && <SidebarSkeleton />}
                     {!isLoading && (
                       <Tracklist 
-                      tracks={tracks} 
-                      setCurrentTrack={setCurrentTrack} />
+                        tracks={tracks} 
+                        setCurrentTrack={setCurrentTrack}
+                        isPlaying={isPlaying}
+                        setIsPlaying={setIsPlaying}
+                        setTrackIndex={setTrackIndex} 
+                      />
                     )}
                     {!isLoading && (
                     <Sidebar  categories={ categories }/>)}
               </S.Main>
               
-              {currentTrack && <AudioPlayer currentTrack={currentTrack} />}
+              {currentTrack &&  (
+                <AudioPlayer 
+                  currentTrack={currentTrack} isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
+                  tracks={tracks}
+                  setCurrentTrack={setCurrentTrack}
+                  trackIndex={trackIndex}
+                  setTrackIndex={setTrackIndex} 
+                />
+              )}
               <footer className="footer" />
             </S.Container>
           </S.Wrapper>

@@ -2,7 +2,14 @@ import * as S from './AudioPlayer.styles';
 //import { styled } from "styled-components";
 import { useRef, useState, useEffect } from "react";
 
-export default function AudioPlayer({ currentTrack }) {
+export default function AudioPlayer({ currentTrack, isPlaying,
+  setIsPlaying,
+  tracks,
+  setCurrentTrack,
+  trackIndex,
+  setTrackIndex, }) {
+    console.log (isPlaying)
+    console.log (setIsPlaying)
   if (!currentTrack) return null
   if (currentTrack) {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -12,7 +19,7 @@ export default function AudioPlayer({ currentTrack }) {
     const [repeat, setRepeat] = useState(false);
     const audioRef = useRef(null);
     const progressBarRef = useRef(null);
-
+    console.log (isPlaying)
     useEffect(() => {
       if (audioRef) {
         audioRef.current.volume = volume / 100;
@@ -68,6 +75,26 @@ export default function AudioPlayer({ currentTrack }) {
     }
     return "00:00";
   };
+
+  const handlePrev = () => {
+    if (trackIndex === 0) {
+      let lastTrackIndex = tracks.length - 1
+      setTrackIndex(lastTrackIndex)
+      setCurrentTrack(tracks[lastTrackIndex])
+    } else {
+      setTrackIndex((prev) => prev - 1)
+      setCurrentTrack(tracks[trackIndex - 1])
+    }
+  }
+  const handleNext = () => {
+    if (trackIndex >= tracks.length - 1) {
+      setTrackIndex(0)
+      setCurrentTrack(tracks[0])
+    } else {
+      setTrackIndex((prev) => prev + 1)
+      setCurrentTrack(tracks[trackIndex + 1])
+    }
+  }
     return (
       <>
         <audio
@@ -98,8 +125,8 @@ export default function AudioPlayer({ currentTrack }) {
                 <S.PlayerControls isPlaying={isPlaying} currentTrack={currentTrack} handleRepeat={handleRepeat}
                 repeat={repeat}
                 togglePlay={togglePlay}>
-                  <S.PlayerBtnPrev>
-                    <S.PlayerBtnPrevSvg alt="prev" onClick={() => alert("Еще не реализовано")}>
+                  <S.PlayerBtnPrev >
+                    <S.PlayerBtnPrevSvg alt="prev" onClick={handlePrev}>
                       <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                     </S.PlayerBtnPrevSvg>
                   </S.PlayerBtnPrev>
@@ -112,8 +139,8 @@ export default function AudioPlayer({ currentTrack }) {
                     )}
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
-                  <S.PlayerBtnNext>
-                    <S.PlayerBtnNextSvg alt="next" onClick={() => alert("Еще не реализовано")}>
+                  <S.PlayerBtnNext >
+                    <S.PlayerBtnNextSvg alt="next" onClick={handleNext}>
                       <use xlinkHref="img/icon/sprite.svg#icon-next" />
                     </S.PlayerBtnNextSvg>
                   </S.PlayerBtnNext>
