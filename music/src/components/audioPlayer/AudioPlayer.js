@@ -25,7 +25,25 @@ export default function AudioPlayer({ currentTrack, isPlaying,
         audioRef.current.volume = volume / 100;
       }
     }, [volume, audioRef]);
-
+    const handlePrev = () => {
+      if (trackIndex === 0) {
+        let lastTrackIndex = tracks.length - 1
+        setTrackIndex(lastTrackIndex)
+        setCurrentTrack(tracks[lastTrackIndex])
+      } else {
+        setTrackIndex((prev) => prev - 1)
+        setCurrentTrack(tracks[trackIndex - 1])
+      }
+    }
+    const handleNext = () => {
+      if (trackIndex >= tracks.length - 1) {
+        setTrackIndex(0)
+        setCurrentTrack(tracks[0])
+      } else {
+        setTrackIndex((prev) => prev + 1)
+        setCurrentTrack(tracks[trackIndex + 1])
+      }
+    }
   const handleStart = () => {
     if (audioRef.current) {
       audioRef.current.play();
@@ -43,8 +61,19 @@ export default function AudioPlayer({ currentTrack, isPlaying,
     if (audioRef.current) {
       audioRef.current.loop = !repeat;
       setRepeat(!repeat);
-    }
+    } 
+      
+    
   };
+
+  const isRepeat = () => {
+    if (repeat) {
+      audioRef.current.loop = true
+    } else {
+      handleNext()
+      
+    }
+  }
 
   const togglePlay = isPlaying ? handleStop : handleStart;
 
@@ -76,25 +105,7 @@ export default function AudioPlayer({ currentTrack, isPlaying,
     return "00:00";
   };
 
-  const handlePrev = () => {
-    if (trackIndex === 0) {
-      let lastTrackIndex = tracks.length - 1
-      setTrackIndex(lastTrackIndex)
-      setCurrentTrack(tracks[lastTrackIndex])
-    } else {
-      setTrackIndex((prev) => prev - 1)
-      setCurrentTrack(tracks[trackIndex - 1])
-    }
-  }
-  const handleNext = () => {
-    if (trackIndex >= tracks.length - 1) {
-      setTrackIndex(0)
-      setCurrentTrack(tracks[0])
-    } else {
-      setTrackIndex((prev) => prev + 1)
-      setCurrentTrack(tracks[trackIndex + 1])
-    }
-  }
+  
     return (
       <>
         <audio
@@ -104,6 +115,7 @@ export default function AudioPlayer({ currentTrack, isPlaying,
           onTimeUpdate={handleProgress}
           onLoadedMetadata={onLoadedMetadata}
           type="audio/mpeg"
+          onEnded={isRepeat}
         ></audio>
         <S.Bar>
           <S.TimeBar>
@@ -174,6 +186,7 @@ export default function AudioPlayer({ currentTrack, isPlaying,
                     <S.TrackPlayAlbum>
                       <S.TrackPlayAlbumLink href="http://">{currentTrack.author}</S.TrackPlayAlbumLink>
                     </S.TrackPlayAlbum>
+                    
                   </S.TrackPlayContain>
 
                   <S.TrackPlayLikeDis>
