@@ -2,6 +2,8 @@ import { AppRoutes } from "./routes";
 import { useState } from 'react'
 import { AuthProvider } from './Contexts/AuthContext'
 import { useNavigate } from "react-router-dom";
+import { Provider } from 'react-redux'
+import { store } from './store/store'
 import "./App.styles";
 
 function App() {
@@ -18,7 +20,8 @@ function App() {
   
   
   return (
-    <AuthProvider>
+    <Provider store={store}>
+     <AuthProvider>
       <div className="App">
         <div className="App-layout">
           <AppRoutes
@@ -27,7 +30,10 @@ function App() {
           />
         </div>
       </div>
-    </AuthProvider>
+     
+    </AuthProvider> 
+    </Provider>
+    
   );
 }
 
