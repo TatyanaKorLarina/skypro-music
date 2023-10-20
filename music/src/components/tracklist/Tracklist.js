@@ -5,7 +5,7 @@ import * as S from './Traclist.styles'
 
 
 
-function Tracklist({ tracks, setCurrentTrack, isPlaying,
+function Tracklist({ tracks, currentTrack, setCurrentTrack, isPlaying,
   setIsPlaying,
   setTrackIndex, }) {
   
@@ -26,9 +26,17 @@ function Tracklist({ tracks, setCurrentTrack, isPlaying,
             <S.PlaylistTrack>
               <S.TrackTitle>
                 <S.TrackTitleImage>
-                  <S.TrackTitleSvg>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
-                  </S.TrackTitleSvg>
+                {currentTrack === track ? (
+                    <S.PlayingDot
+                      style={{
+                        animationPlayState: isPlaying ? 'running' : 'paused',
+                      }}
+                    ></S.PlayingDot>
+                  ) : (
+                    <S.TrackTitleSvg alt="music">
+                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                    </S.TrackTitleSvg>
+                  )}
                 </S.TrackTitleImage>
                 <S.TrackTitleText>
                   <S.TrackTitleLink>

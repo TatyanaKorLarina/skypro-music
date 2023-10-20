@@ -95,6 +95,7 @@ export const MainPage = ({ categories }) => {
                     {!isLoading && (
                       <Tracklist 
                         tracks={tracks} 
+                        currentTrack={currentTrack}
                         setCurrentTrack={setCurrentTrack}
                         isPlaying={isPlaying}
                         setIsPlaying={setIsPlaying}

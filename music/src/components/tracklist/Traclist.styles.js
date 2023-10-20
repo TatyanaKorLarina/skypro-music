@@ -1,5 +1,5 @@
 import  styled  from 'styled-components'
-
+import { keyframes } from 'styled-components'
 export const PlaylistItem = styled.div`
   width: 100%;
   display: block;
@@ -148,4 +148,24 @@ export const TrackTimeText = styled.span`
   line-height: 24px;
   text-align: right;
   color: #696969;
+`
+
+export const BubbleOut = keyframes`
+0%,
+to {
+  transform: scale(0.5);
+}
+50% {
+  transform: scale(1);
+}
+`
+
+export const PlayingDot = styled.div`
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 8px;
+  display: block;
+  animation: ${BubbleOut} 0.6s ease-in-out infinite both;
+  animation-play-state: running;
 `
