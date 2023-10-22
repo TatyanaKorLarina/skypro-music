@@ -8,7 +8,7 @@ import { setCurrentAudio } from "../../../src/store/tracksSlice";
 import { useDispatch } from 'react-redux';
 function Tracklist({ 
   tracks, 
-  currentTrack, 
+  //currentTrack, 
   setCurrentTrack,
   
   //isPlaying,
@@ -16,7 +16,7 @@ function Tracklist({
   setTrackIndex, 
 }) {
   const dispatch = useDispatch();
- //const currentAudio = useSelector((state) => state.tracks.track)
+ const currentAudio = useSelector((state) => state.tracks.track)
  //const setCurrentTrack = dispatch(setCurrentAudio(currentAudio));
  const isPlaying = useSelector((state) => state.tracks.isPlaying);
   return (
@@ -37,7 +37,7 @@ function Tracklist({
             <S.PlaylistTrack>
               <S.TrackTitle>
                 <S.TrackTitleImage>
-                {currentTrack === track ? (
+                {currentAudio.id === track.id ? (
                    
                      
                    <S.PlayingDot
