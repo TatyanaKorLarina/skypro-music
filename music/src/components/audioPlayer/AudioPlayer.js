@@ -1,22 +1,26 @@
 import * as S from './AudioPlayer.styles';
 //import { styled } from "styled-components";
 import { useRef, useState, useEffect } from "react";
-import { setCurrentAudio, setPlayingStatus, setShuffleStatus } from "../../../src/store/tracksSlice";
+import { nextTrack, prevTrack, setCurrentAudio, setPlayingStatus, setShuffleStatus } from "../../../src/store/tracksSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
 //const dispatch = useDispatch();
  
-export default function AudioPlayer({  //isPlaying,
+export default function AudioPlayer(  
+  //isPlaying,
   //setIsPlaying,
-  tracks,
+ // tracks,
   
   
-  trackIndex,
-  setTrackIndex, }) {
+  //trackIndex,
+ // setTrackIndex,
+ ) {
+  const dispatch = useDispatch();
     const currentTrack = useSelector((state) => state.tracks.track);
-    const dispatch = useDispatch();
+    
  //const currentTrack = useSelector((state) => state.tracks.track);
  const setCurrentTrack = dispatch(setCurrentAudio(currentTrack));
+ console.log(setCurrentTrack)
  const isPlaying = useSelector((state) => state.tracks.isPlaying);
   const isShuffled = useSelector((state) => state.tracks.isShuffleEnabled);
     //console.log (isPlaying)
@@ -30,12 +34,34 @@ export default function AudioPlayer({  //isPlaying,
     const [repeat, setRepeat] = useState(false);
     const audioRef = useRef(null);
     const progressBarRef = useRef(null);
+    //const duration = currentTrack.duration_in_seconds;
     //console.log (isPlaying)
     useEffect(() => {
       if (audioRef) {
         audioRef.current.volume = volume / 100;
       }
     }, [volume, audioRef]);
+
+
+
+    useEffect(() => {
+    if (currentTrack.id) {
+      dispatch(setPlayingStatus(true));
+      return;
+    } else {
+      dispatch(setPlayingStatus(false));
+    }
+  }, [currentTrack.id]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying, audioRef, currentTrack.id]);
+
+
     //const handlePrev = () => {
    //   if (isShuffled) {
    //     shuffled()
@@ -47,16 +73,16 @@ export default function AudioPlayer({  //isPlaying,
   //    }
  //   }
 //    console.log(handlePrev)
-    const handleNext = () => {
-      if (isShuffled) {
-        shuffled()
-      } else if (trackIndex >= tracks.length - 1) {
-        return
-      } else {
-        setTrackIndex((prev) => prev + 1)
-        setCurrentTrack(tracks[trackIndex + 1])
-      }
-    }
+    //const handleNext = () => {
+   //   if (isShuffled) {
+   //     shuffled()
+  //    } else if (trackIndex >= tracks.length - 1) {
+ //       return
+ //     } else {
+  //      setTrackIndex((prev) => prev + 1)
+  //      setCurrentTrack(tracks[trackIndex + 1])
+//      }
+//    }
 
     //const [playShuffle, setIsPlayShuffle] = useState(false)
     //const getRandomSong = (max) => {
@@ -103,7 +129,7 @@ export default function AudioPlayer({  //isPlaying,
     if (repeat) {
       audioRef.current.loop = true
     } else {
-      handleNext()
+     // handleNext()
       
     }
   }
@@ -174,7 +200,7 @@ export default function AudioPlayer({  //isPlaying,
                 repeat={repeat}
                 togglePlay={togglePlay}>
                   <S.PlayerBtnPrev >
-                    <S.PlayerBtnPrevSvg alt="prev" onClick={() => dispatch(setPlayingStatus())}>
+                    <S.PlayerBtnPrevSvg alt="prev" onClick={() => dispatch(prevTrack())}>
                       <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                     </S.PlayerBtnPrevSvg>
                   </S.PlayerBtnPrev>
@@ -188,7 +214,7 @@ export default function AudioPlayer({  //isPlaying,
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
                   <S.PlayerBtnNext >
-                    <S.PlayerBtnNextSvg alt="next" onClick={handleNext}>
+                    <S.PlayerBtnNextSvg alt="next" onClick={() => dispatch(nextTrack())}>
                       <use xlinkHref="img/icon/sprite.svg#icon-next" />
                     </S.PlayerBtnNextSvg>
                   </S.PlayerBtnNext>
