@@ -4,16 +4,21 @@ import * as S from './Traclist.styles'
 //import Track from '../track/Track';
 //import { togglePlayer } from '../../store/tracksSlice'
 //import { useSelector } from 'react-redux';
-
+//import { setCurrentAudio } from "../../../src/store/tracksSlice";
+//import { useDispatch, useSelector } from 'react-redux';
 function Tracklist({ 
   tracks, 
   currentTrack, 
-  setCurrentTrack, 
+  setCurrentTrack,
+  
   isPlaying,
   setIsPlaying,
   setTrackIndex, 
 }) {
-  
+  //const dispatch = useDispatch();
+ // const currentAudio = useSelector((state) => state.tracks.track)
+ //const setCurrentTrack = dispatch(setCurrentAudio(currentAudio));
+
   return (
     <S.ContentPlaylist> 
       {tracks.map((track, index) => {

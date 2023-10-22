@@ -11,8 +11,8 @@ const tracksSlice = createSlice({
     currentPlaylist: null,
   },
   reducers: {
-    setCurrentAudio(state, action) {
-      state.track =  action.payload;
+    setCurrentAudio: (state, action) => {
+      state.track = action.payload;
       
     },
 

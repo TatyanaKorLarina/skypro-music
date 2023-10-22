@@ -11,7 +11,7 @@ import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkele
 import SidebarSkeleton from '../../components/sidebarSkeleton/SidebarSkeleton'
 import Filter from '../../components/filter/Filter';
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentAudio,  setTracklist }  from '../../store/tracksSlice'
+import { setCurrentAudio, setTracklist }  from '../../store/tracksSlice'
 import * as S from '../../App.styles'
 
 export const MainPage = ({ categories }) => {
@@ -41,15 +41,15 @@ export const MainPage = ({ categories }) => {
       })
   }, [])
   //getTracks().then((tracks) => console.log(tracks));
-  const currentTrck = useSelector((state) => state.trck)
+  const currentAudio = useSelector((state) => state.tracks.track)
   const [trackIndex, setTrackIndex] = useState(null)
-  const [currentTrack, setCurrentTrack] = useState(currentTrck)
+  const [currentTrack, setCurrentTrack] = useState(currentAudio)
 
-  
+  console.log(setCurrentAudio)
   const dispatch = useDispatch()
-  const addAudio = () => dispatch(setCurrentAudio(currentTrack))
+  //const setCurrentTrack = () => dispatch(setCurrentAudio(currentAudio))
   const addTrackList = () => dispatch(setTracklist(tracks))
-  addAudio()
+  //setCurrentTrack()
   useEffect(() => {
     addTrackList()
   }, [currentTrack])

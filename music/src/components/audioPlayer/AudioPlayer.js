@@ -1,13 +1,22 @@
 import * as S from './AudioPlayer.styles';
 //import { styled } from "styled-components";
 import { useRef, useState, useEffect } from "react";
+import { setCurrentAudio } from "../../../src/store/tracksSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function AudioPlayer({ currentTrack, isPlaying,
+//const dispatch = useDispatch();
+ 
+export default function AudioPlayer({  isPlaying,
   setIsPlaying,
   tracks,
-  setCurrentTrack,
+  
+  
   trackIndex,
   setTrackIndex, }) {
+    const currentTrack = useSelector((state) => state.tracks.track);
+    const dispatch = useDispatch();
+ // const currentTrack = useSelector((state) => state.tracks.track);
+ const setCurrentTrack = dispatch(setCurrentAudio(currentTrack));
     console.log (isPlaying)
     console.log (setIsPlaying)
   if (!currentTrack) return null
