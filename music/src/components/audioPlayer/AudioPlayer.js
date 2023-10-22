@@ -133,7 +133,8 @@ export default function AudioPlayer(
       
     }
   }
-
+console.log(isRepeat)
+console.log(shuffled)
   const togglePlay = isPlaying ? handleStop : handleStart;
 
   
@@ -174,10 +175,7 @@ export default function AudioPlayer(
           onTimeUpdate={handleProgress}
           onLoadedMetadata={onLoadedMetadata}
           type="audio/mpeg"
-          onEnded={() => {
-            isRepeat()
-            shuffled()
-          }}
+          onEnded={() => dispatch(nextTrack())}
         ></audio>
         <S.Bar>
           <S.TimeBar>
