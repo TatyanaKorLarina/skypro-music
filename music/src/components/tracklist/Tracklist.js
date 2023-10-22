@@ -3,22 +3,22 @@
 import * as S from './Traclist.styles'
 //import Track from '../track/Track';
 //import { togglePlayer } from '../../store/tracksSlice'
-//import { useSelector } from 'react-redux';
-//import { setCurrentAudio } from "../../../src/store/tracksSlice";
-//import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setCurrentAudio } from "../../../src/store/tracksSlice";
+import { useDispatch } from 'react-redux';
 function Tracklist({ 
   tracks, 
   currentTrack, 
   setCurrentTrack,
   
-  isPlaying,
-  setIsPlaying,
+  //isPlaying,
+  //setIsPlaying,
   setTrackIndex, 
 }) {
-  //const dispatch = useDispatch();
- // const currentAudio = useSelector((state) => state.tracks.track)
+  const dispatch = useDispatch();
+ //const currentAudio = useSelector((state) => state.tracks.track)
  //const setCurrentTrack = dispatch(setCurrentAudio(currentAudio));
-
+ const isPlaying = useSelector((state) => state.tracks.isPlaying);
   return (
     <S.ContentPlaylist> 
       {tracks.map((track, index) => {
@@ -26,9 +26,10 @@ function Tracklist({
           <S.PlaylistItem 
             key={track.id} 
             onClick={() => {
+              dispatch(setCurrentAudio(track))
               setCurrentTrack(track) 
-              isPlaying = true
-              setIsPlaying(isPlaying)
+              isPlaying
+              //setIsPlaying(isPlaying)
               setTrackIndex(index)
             }}
           >

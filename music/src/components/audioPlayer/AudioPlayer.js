@@ -1,13 +1,13 @@
 import * as S from './AudioPlayer.styles';
 //import { styled } from "styled-components";
 import { useRef, useState, useEffect } from "react";
-import { setCurrentAudio } from "../../../src/store/tracksSlice";
+import { setCurrentAudio, setPlayingStatus, setShuffleStatus } from "../../../src/store/tracksSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
 //const dispatch = useDispatch();
  
-export default function AudioPlayer({  isPlaying,
-  setIsPlaying,
+export default function AudioPlayer({  //isPlaying,
+  //setIsPlaying,
   tracks,
   
   
@@ -15,13 +15,15 @@ export default function AudioPlayer({  isPlaying,
   setTrackIndex, }) {
     const currentTrack = useSelector((state) => state.tracks.track);
     const dispatch = useDispatch();
- // const currentTrack = useSelector((state) => state.tracks.track);
+ //const currentTrack = useSelector((state) => state.tracks.track);
  const setCurrentTrack = dispatch(setCurrentAudio(currentTrack));
-    console.log (isPlaying)
-    console.log (setIsPlaying)
+ const isPlaying = useSelector((state) => state.tracks.isPlaying);
+  const isShuffled = useSelector((state) => state.tracks.isShuffleEnabled);
+    //console.log (isPlaying)
+    //console.log (setIsPlaying)
   if (!currentTrack) return null
   if (currentTrack) {
-    const [isPlaying, setIsPlaying] = useState(false);
+    //const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [currentDuration, setCurrentDuration] = useState(0);
     const [volume, setVolume] = useState(60);
@@ -34,18 +36,19 @@ export default function AudioPlayer({  isPlaying,
         audioRef.current.volume = volume / 100;
       }
     }, [volume, audioRef]);
-    const handlePrev = () => {
-      if (playShuffle) {
-        shuffled()
-      } else if (trackIndex === 0) {
-        return
-      } else {
-        setTrackIndex((prev) => prev - 1)
-        setCurrentTrack(tracks[trackIndex - 1])
-      }
-    }
+    //const handlePrev = () => {
+   //   if (isShuffled) {
+   //     shuffled()
+   //   } else if (trackIndex === 0) {
+   //     return
+   //   } else {
+   //     setTrackIndex((prev) => prev - 1)
+  //      setCurrentTrack(tracks[trackIndex - 1])
+  //    }
+ //   }
+//    console.log(handlePrev)
     const handleNext = () => {
-      if (playShuffle) {
+      if (isShuffled) {
         shuffled()
       } else if (trackIndex >= tracks.length - 1) {
         return
@@ -55,35 +58,35 @@ export default function AudioPlayer({  isPlaying,
       }
     }
 
-    const [playShuffle, setIsPlayShuffle] = useState(false)
-    const getRandomSong = (max) => {
-      return Math.floor(Math.random() * max)
-    }
-    const shuffleOnChange = () => {
-      setIsPlayShuffle(!playShuffle)
-    }
+    //const [playShuffle, setIsPlayShuffle] = useState(false)
+    //const getRandomSong = (max) => {
+     // return Math.floor(Math.random() * max)
+   // }
+   //const shuffleOnChange = () => {
+      //setIsPlayShuffle(!playShuffle)
+   // }
     const shuffled = () => {
-      if (playShuffle) {
-        let ind = getRandomSong(tracks.length)
-        setCurrentTrack(tracks[ind])
+      //if (playShuffle) {
+        //let ind = getRandomSong(tracks.length)
+       // setCurrentTrack(tracks[ind])
        
-        trackIndex = ind
-        console.log(
-          `рандомный индекс${ind}, установленный индекс ${trackIndex}`,
-        )
-      }
+       // trackIndex = ind
+       // console.log(
+        //  `рандомный индекс${ind}, установленный индекс ${trackIndex}`,
+       // )
+     // }
       
     }
   const handleStart = () => {
     if (audioRef.current) {
       audioRef.current.play();
-      setIsPlaying(true);
+      //setIsPlaying(true);
     }
   };
 
   const handleStop = () => {
     audioRef.current.pause();
-    setIsPlaying(false);
+    //setIsPlaying(false);
   };
 
 
@@ -171,12 +174,12 @@ export default function AudioPlayer({  isPlaying,
                 repeat={repeat}
                 togglePlay={togglePlay}>
                   <S.PlayerBtnPrev >
-                    <S.PlayerBtnPrevSvg alt="prev" onClick={handlePrev}>
+                    <S.PlayerBtnPrevSvg alt="prev" onClick={() => dispatch(setPlayingStatus())}>
                       <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                     </S.PlayerBtnPrevSvg>
                   </S.PlayerBtnPrev>
                   <S.PlayerBtnPlay>
-                    <S.PlayerBtnPlaySvg alt="play" onClick={togglePlay}>
+                    <S.PlayerBtnPlaySvg alt="play" onClick={() => dispatch(setPlayingStatus())}>
                     {isPlaying ? (
                       <use xlinkHref="img/icon/sprite.svg#icon-pause"></use>
                     ) : (
@@ -198,9 +201,9 @@ export default function AudioPlayer({  isPlaying,
           )}
                     </S.PlayerBtnRepeatSvg>
                   </S.PlayerBtnRepeat>
-                  {playShuffle ? (
+                  {isShuffled ? (
                   <S.PlayerBtnShuffle
-                    onClick={shuffleOnChange}
+                  onClick={() => dispatch(setShuffleStatus())}
                     className="_btn-icon"
                   >
                     <svg
@@ -222,7 +225,7 @@ export default function AudioPlayer({  isPlaying,
                   </S.PlayerBtnShuffle>
                 ) : (
                   <S.PlayerBtnShuffle
-                    onClick={shuffleOnChange}
+                  onClick={() => dispatch(setShuffleStatus())}
                     className="_btn-icon"
                   >
                     <S.PlayerBtnShuffleSvg alt="shuffle">
