@@ -169,7 +169,7 @@ console.log(shuffled)
     return (
       <>
         <audio
-          controls
+          //controls
           ref={audioRef}
           src={currentTrack.track_file}
           onTimeUpdate={handleProgress}

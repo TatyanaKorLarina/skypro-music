@@ -37,7 +37,7 @@ function Tracklist({
             <S.PlaylistTrack>
               <S.TrackTitle>
                 <S.TrackTitleImage>
-                {currentAudio.id === track.id ? (
+                {currentAudio.id && currentAudio.id === track.id ? (
                    
                      
                    <S.PlayingDot
