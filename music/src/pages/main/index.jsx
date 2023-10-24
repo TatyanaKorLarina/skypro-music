@@ -10,14 +10,15 @@ import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkele
 //import AudioPlayerSkeleton from '../../components/audioPlayerSkeleton/AudioPlayerSkeleton'
 import SidebarSkeleton from '../../components/sidebarSkeleton/SidebarSkeleton'
 import Filter from '../../components/filter/Filter';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentAudio, setTracklist }  from '../../store/tracksSlice'
 import * as S from '../../App.styles'
 
 export const MainPage = ({ categories }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
-  const [currentTrack, setCurrentTrack] = useState(null)
+  const [isPlaying, setIsPlaying] = useState(false)
   const navigate = useNavigate()
   const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
   console.log (isLogIn)
@@ -40,7 +41,18 @@ export const MainPage = ({ categories }) => {
       })
   }, [])
   //getTracks().then((tracks) => console.log(tracks));
- 
+  const currentAudio = useSelector((state) => state.tracks.track)
+  const [trackIndex, setTrackIndex] = useState(null)
+  const [currentTrack, setCurrentTrack] = useState(currentAudio)
+
+  console.log(setCurrentAudio)
+  const dispatch = useDispatch()
+  //const setCurrentTrack = () => dispatch(setCurrentAudio(currentAudio))
+  const addTrackList = () => dispatch(setTracklist(tracks))
+  //setCurrentTrack()
+  useEffect(() => {
+    addTrackList()
+  }, [currentTrack])
   return (
       <>
       <S.GlobalStyle />
@@ -91,14 +103,28 @@ export const MainPage = ({ categories }) => {
                     {isLoading && <SidebarSkeleton />}
                     {!isLoading && (
                       <Tracklist 
-                      tracks={tracks} 
-                      setCurrentTrack={setCurrentTrack} />
+                        tracks={tracks} 
+                        currentTrack={currentTrack}
+                        setCurrentTrack={setCurrentTrack}
+                        isPlaying={isPlaying}
+                        setIsPlaying={setIsPlaying}
+                        setTrackIndex={setTrackIndex} 
+                      />
                     )}
                     {!isLoading && (
                     <Sidebar  categories={ categories }/>)}
               </S.Main>
               
-              {currentTrack && <AudioPlayer currentTrack={currentTrack} />}
+              {currentTrack &&  (
+                <AudioPlayer 
+                  currentTrack={currentTrack} isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
+                  tracks={tracks}
+                  setCurrentTrack={setCurrentTrack}
+                  trackIndex={trackIndex}
+                  setTrackIndex={setTrackIndex} 
+                />
+              )}
               <footer className="footer" />
             </S.Container>
           </S.Wrapper>

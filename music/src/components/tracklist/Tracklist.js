@@ -2,23 +2,55 @@
 //import { getTracks } from '../../api'
 import * as S from './Traclist.styles'
 //import Track from '../track/Track';
-
-
-
-function Tracklist({ tracks, setCurrentTrack }) {
+//import { togglePlayer } from '../../store/tracksSlice'
+import { useSelector } from 'react-redux';
+import { setCurrentAudio } from "../../../src/store/tracksSlice";
+import { useDispatch } from 'react-redux';
+function Tracklist({ 
+  tracks, 
+  //currentTrack, 
+  setCurrentTrack,
   
+  //isPlaying,
+  //setIsPlaying,
+  setTrackIndex, 
+}) {
+  const dispatch = useDispatch();
+ const currentAudio = useSelector((state) => state.tracks.track)
+ //const setCurrentTrack = dispatch(setCurrentAudio(currentAudio));
+ const isPlaying = useSelector((state) => state.tracks.isPlaying);
   return (
     <S.ContentPlaylist> 
-      {tracks.map((track) => {
+      {tracks.map((track, index) => {
         return (
-          <S.PlaylistItem key={track.id} onClick={() => setCurrentTrack(track)}>
+          <S.PlaylistItem 
+            key={track.id} 
+            onClick={() => {
+              dispatch(setCurrentAudio(track))
+              setCurrentTrack(track) 
+              isPlaying
+              //setIsPlaying(isPlaying)
+              setTrackIndex(index)
+            }}
+          >
       
             <S.PlaylistTrack>
               <S.TrackTitle>
                 <S.TrackTitleImage>
-                  <S.TrackTitleSvg>
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
-                  </S.TrackTitleSvg>
+                {currentAudio.id && currentAudio.id === track.id ? (
+                   
+                     
+                   <S.PlayingDot
+                      style={{
+                        animationPlayState: isPlaying ? 'running' : 'paused',
+                      }}
+                    ></S.PlayingDot>
+                    
+                  ) : (
+                    <S.TrackTitleSvg alt="music">
+                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                    </S.TrackTitleSvg>
+                  )}
                 </S.TrackTitleImage>
                 <S.TrackTitleText>
                   <S.TrackTitleLink>

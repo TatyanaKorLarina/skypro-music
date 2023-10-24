@@ -71,3 +71,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Сделаю за 12 часов
 Сделала за 20 часов
+
+I will do for 6 hours
+
+No, I spent 10 hours to do hw9!!!
