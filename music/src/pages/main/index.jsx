@@ -20,7 +20,7 @@ export const MainPage = () => {
   const [
     tracks,
     setCurrentTrack,
-    currentAudio,
+    currentTrack,
     isPlaying,
     setIsPlaying,
     setTrackIndex,
@@ -33,11 +33,11 @@ export const MainPage = () => {
     <>
       <p style={{ color: 'red', position: 'relative' }}>{tracksError}</p>
       {isLoading && <TracklistSkeleton />}
-      {!isLoading && currentAudio && (
+      {!isLoading && currentTrack && (
         <Tracklist
           tracks={tracks} 
           setCurrentTrack={setCurrentTrack}
-          currentAudio={currentAudio}
+          currentTrack={currentTrack}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           setTrackIndex={setTrackIndex}

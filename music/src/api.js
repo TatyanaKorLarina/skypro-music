@@ -96,3 +96,31 @@ export async function getTracks() {
       return data
     }
   }
+
+  export const getMySongs = async (email, password) => {
+    const response = await fetch(
+      'https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/',
+      {
+        method: 'GET',
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+        headers: {
+          'content-type': 'application/json',
+        },
+      },
+    )
+  
+    const data = await response.json()
+  
+    if (!response.ok) {
+      console.log(data)
+      const error = data.detail ?? data.email ?? data.password
+      console.log(error)
+      throw new Error(error)
+    } else {
+       console.log(data)
+      return data
+    }
+  }

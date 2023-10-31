@@ -5,7 +5,7 @@ import NavMenu from '../components/navMenu/NavMenu';
 import Tracklist from '../components/tracklist/Tracklist';
 import Sidebar from '../components/sidebar/Sidebar';
 import { useAuth } from '../Contexts/AuthContext'
-import { getTracks } from '../api';
+import { getTracks, getMySongs } from '../api';
 //import TracklistSkeleton from '../components/tracklistSkeleton/TracklistSkeleton'
 import AudioPlayerSkeleton from '../components/audioPlayerSkeleton/AudioPlayerSkeleton'
 import SidebarSkeleton from '../components/sidebarSkeleton/SidebarSkeleton'
@@ -20,6 +20,7 @@ export const Layout = () => {
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [myTracks, setMyTracks] = useState([])
   const navigate = useNavigate()
   const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
   console.log (isLogIn)
@@ -34,6 +35,16 @@ export const Layout = () => {
       .then((tracks) => {
         setTracks(tracks)
         
+      })
+      .then(() => setIsLoading(false))
+      .catch((error) => {
+        setTracksError(error.message)
+        setIsLoading(false)
+      })
+      getMySongs()
+      .then((myTracks) => {
+        setMyTracks(myTracks)
+        console.log(myTracks)
       })
       .then(() => setIsLoading(false))
       .catch((error) => {
@@ -105,6 +116,8 @@ export const Layout = () => {
                     setTrackIndex,
                     tracksError,
                     isLoading,
+                    myTracks,
+                    setMyTracks,
                   ]}
                 />
                   </S.CenterblockContent>
@@ -116,7 +129,7 @@ export const Layout = () => {
                     {isLoading && <AudioPlayerSkeleton />}
                     {!isLoading && 
                     <Sidebar />}
-                    {!isLoading && currentAudio && (
+                    {!isLoading && currentTrack && (
                       <Tracklist 
                         tracks={tracks} 
                         currentTrack={currentTrack}
@@ -124,6 +137,8 @@ export const Layout = () => {
                         isPlaying={isPlaying}
                         //setIsPlaying={setIsPlaying}
                         setTrackIndex={setTrackIndex} 
+                        myTracks={myTracks}
+                        setMyTracks={setMyTracks}
                       />
                     )}
               </S.Main>
