@@ -13,7 +13,7 @@ import Filter from '../components/filter/Filter';
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentAudio, setTracklist }  from '../store/tracksSlice'
 import * as S from '../App.styles'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +41,7 @@ export const Layout = () => {
         setTracksError(error.message)
         setIsLoading(false)
       })
-      getMySongs()
+      getMySongs(localStorage.user)
       .then((myTracks) => {
         setMyTracks(myTracks)
         console.log(myTracks)
@@ -66,6 +66,7 @@ export const Layout = () => {
   useEffect(() => {
     addTrackList()
   }, [currentTrack])
+  const location = useLocation()
   return (
       <>
       <S.GlobalStyle />
@@ -94,6 +95,9 @@ export const Layout = () => {
                     </S.SidebarPersonal>
                   </S.CenterblockSearch>
                   <S.CenterblockH2>Треки</S.CenterblockH2>
+                  <S.CenterblockH2>
+                {location.pathname === '/' ? 'Треки' : 'Мои треки'}
+              </S.CenterblockH2>
                   <Filter />
                   <S.CenterblockContent>
                     <S.ContentTitle>

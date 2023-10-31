@@ -2,15 +2,19 @@ import Tracklist from '../../components/tracklist/Tracklist'
 import { useOutletContext } from 'react-router-dom'
 export const FavoritesPage = () => {
   const [
-    myTracks,
-    setMyTracks,
+    tracks,
+    //setMyTracks,
     setCurrentTrack,
     currentTrack,
     isPlaying,
     setIsPlaying,
     setTrackIndex,
+    tracksError,
+    isLoading,
+    myTracks,
+    setMyTracks
   ] = useOutletContext()
-  console.log(setMyTracks)
+  console.log(setMyTracks, tracksError, isLoading,tracks)
   return (
     <>
       {currentTrack && myTracks ? (
