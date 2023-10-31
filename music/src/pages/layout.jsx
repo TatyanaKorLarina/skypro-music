@@ -1,54 +1,21 @@
-//import { useState, useEffect } from 'react'
-//import { useNavigate } from 'react-router-dom'
-import '../../components/audioPlayer/AudioPlayer';
-//import NavMenu from '../../components/navMenu/NavMenu';
-import Tracklist from '../../components/tracklist/Tracklist';
-//import Sidebar from '../../components/sidebar/Sidebar';
-//import { useAuth } from '../../Contexts/AuthContext'
-//import { getTracks } from '../../api';
-import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkeleton'
-//import AudioPlayerSkeleton from '../../components/audioPlayerSkeleton/AudioPlayerSkeleton'
-//import SidebarSkeleton from '../../components/sidebarSkeleton/SidebarSkeleton'
-//import Filter from '../../components/filter/Filter';
-//import { useSelector, useDispatch } from 'react-redux'
-//import { setCurrentAudio, setTracklist }  from '../../store/tracksSlice'
-//import * as S from '../../App.styles'
-//import React from 'react';
-import { useOutletContext } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import AudioPlayer from '../components/audioPlayer/AudioPlayer';
+import NavMenu from '../components/navMenu/NavMenu';
+import Tracklist from '../components/tracklist/Tracklist';
+import Sidebar from '../components/sidebar/Sidebar';
+import { useAuth } from '../Contexts/AuthContext'
+import { getTracks } from '../api';
+//import TracklistSkeleton from '../components/tracklistSkeleton/TracklistSkeleton'
+import AudioPlayerSkeleton from '../components/audioPlayerSkeleton/AudioPlayerSkeleton'
+import SidebarSkeleton from '../components/sidebarSkeleton/SidebarSkeleton'
+import Filter from '../components/filter/Filter';
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentAudio, setTracklist }  from '../store/tracksSlice'
+import * as S from '../App.styles'
+import { Outlet } from 'react-router-dom'
 
-export const MainPage = () => {
-  const [
-    tracks,
-    setCurrentTrack,
-    currentAudio,
-    isPlaying,
-    setIsPlaying,
-    setTrackIndex,
-    tracksError,
-    isLoading,
-
-  ] = useOutletContext()
-
-  return(
-    <>
-      <p style={{ color: 'red', position: 'relative' }}>{tracksError}</p>
-      {isLoading && <TracklistSkeleton />}
-      {!isLoading && currentAudio && (
-        <Tracklist
-          tracks={tracks} 
-          setCurrentTrack={setCurrentTrack}
-          currentAudio={currentAudio}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          setTrackIndex={setTrackIndex}
-          tracksError={tracksError}
-          isLoading={isLoading}
-          />
-      )}
-    </>
-  )
-}
-/*export const MainPage = ({ categories }) => {
+export const Layout = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
@@ -78,11 +45,12 @@ export const MainPage = () => {
   const currentAudio = useSelector((state) => state.tracks.track)
   const [trackIndex, setTrackIndex] = useState(null)
   const [currentTrack, setCurrentTrack] = useState(currentAudio)
-
+  const addSong = () => dispatch(setCurrentAudio(currentTrack))
   console.log(setCurrentAudio)
   const dispatch = useDispatch()
   //const setCurrentTrack = () => dispatch(setCurrentAudio(currentAudio))
   const addTrackList = () => dispatch(setTracklist(tracks))
+  addSong()
   //setCurrentTrack()
   useEffect(() => {
     addTrackList()
@@ -127,26 +95,37 @@ export const MainPage = () => {
                         </S.PlaylistTitleSvg>
                       </S.PlaylistTitleCol4>
                     </S.ContentTitle>
-                    
+                    <Outlet
+                  context={[
+                    tracks,
+                    setCurrentTrack,
+                    currentTrack,
+                    isPlaying,
+                    setIsPlaying,
+                    setTrackIndex,
+                    tracksError,
+                    isLoading,
+                  ]}
+                />
                   </S.CenterblockContent>
                 </S.MainCenterblock>
                 <p style={{ color: 'red', position: 'relative' }}>
                       {tracksError}
                     </p>
-                    {isLoading && <TracklistSkeleton />}
                     {isLoading && <SidebarSkeleton />}
-                    {!isLoading && (
+                    {isLoading && <AudioPlayerSkeleton />}
+                    {!isLoading && 
+                    <Sidebar />}
+                    {!isLoading && currentAudio && (
                       <Tracklist 
                         tracks={tracks} 
                         currentTrack={currentTrack}
-                        setCurrentTrack={setCurrentTrack}
+                        //setCurrentTrack={setCurrentTrack}
                         isPlaying={isPlaying}
-                        setIsPlaying={setIsPlaying}
+                        //setIsPlaying={setIsPlaying}
                         setTrackIndex={setTrackIndex} 
                       />
                     )}
-                    {!isLoading && (
-                    <Sidebar  categories={ categories }/>)}
               </S.Main>
               
               {currentTrack &&  (
@@ -168,10 +147,6 @@ export const MainPage = () => {
         
       
     )
-  } */
-
-
-  
-  
+  }
   
   
