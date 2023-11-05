@@ -33,81 +33,80 @@ function Tracklist({
 
  const findLike = (arr, item) => {
   if (Array.isArray(arr)) {
-    let found = arr.find((element) => element === item)
-    return found
+    const found = arr.find((element) => element === item);
+    return found;
   } else {
-    console.log('Given data is not an array')
+    console.log('Given data is not an array');
   }
-}
-console.log('все лайкнутые', likeInd)
+};
+
+console.log('все лайкнутые', likeInd);
+
 const Liking = (id) => {
   putLike(localStorage.user, id)
     .then((res) => {
-      console.log(res)
+      console.log(res);
       if (res.status === 401) {
         //navigate('/login', { replace: true })
-        return
+        return;
       }
-      getTracks().then((tracks) => {
-        setTracks(tracks)
-        // console.log(tracks)
-      })
-      getMySongs(localStorage.user)
-        .then((mySongs) => {
-          setMySongs(mySongs)
-          // console.log(myTracks)
+      getTracks()
+        .then((tracks) => {
+          setTracks(tracks);
+          // console.log(tracks)
         })
         .then(() => {
-          setLikeInd([...likeInd, id])
+          setLikeInd([...likeInd, id]);
         })
-    })
-    .catch((error) => {
-      if (
-        error.message === 'Данный токен недействителен для любого типа токена'
-      ) {
-        //navigate('/login', { replace: true })
-        return
-      }
-      console.log(error)
-      throw new Error(error)
-    })
-}
-const Disliking = (id) => {
-  putDislike(localStorage.user, id)
-    .then((res) => {
-      console.log(res)
-      if (res.status === 401) {
-        //navigate('/login', { replace: true })
-        return
-      }
-      getTracks().then((tracks) => {
-        setTracks(tracks)
-        // console.log(tracks)
-      })
-      getMySongs(localStorage.user)
-        .then((mySongs) => {
-          setMySongs(mySongs)
-          // console.log(mySongs)
-        })
-        .then(() => {
-          let index = likeInd.indexOf(id)
-          if (index > -1) {
-            
-            likeInd.splice(index, 1)
+        .catch((error) => {
+          if (error.message === 'Данный токен недействителен для любого типа токена') {
+            //navigate('/login', { replace: true })
+            return;
           }
-        })
+          console.log(error);
+          throw new Error(error);
+        });
+
+      getMySongs(localStorage.user)
+        .then((mySongs) => {
+          setMySongs(mySongs);
+          // console.log(mySongs)
+        });
     })
     .catch((error) => {
-      if (
-        error.message === 'Данный токен недействителен для любого типа токена'
-      ) {
-        //navigate('/login', { replace: true })
-        return
+      if (error.message === 'Данный токен недействителен для любого типа токена') {
+        return;
       }
-      console.log(error)
-      throw new Error(error)
-    })
-}
+      console.log(error);
+      throw new Error(error);
+    });
+};
+const Disliking = async (id) => {
+  try {
+    const res = await putDislike(localStorage.user, id);
+    console.log(res);
+    if (res.status === 401) {
+      //navigate('/login', { replace: true });
+      return;
+    }
+
+    const [tracks, mySongs] = await Promise.all([getTracks(), getMySongs(localStorage.user)]);
+    setTracks(tracks);
+    setMySongs(mySongs);
+
+    const index = likeInd.indexOf(id);
+    if (index > -1) {
+      likeInd.splice(index, 1);
+    }
+  } catch (error) {
+    if (error.message === 'Данный токен недействителен для любого типа токена') {
+      //navigate('/login', { replace: true });
+      return;
+    }
+    console.error(error);
+    throw new Error(error);
+  }
+};
   return (
     <S.ContentPlaylist> 
       {tracks.map((track, index) => {
