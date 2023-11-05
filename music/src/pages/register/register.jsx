@@ -11,7 +11,7 @@ export const RegisterPage = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const checkForm = () => password === confirmPassword
   const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
   console.log (authUser)
@@ -92,7 +92,7 @@ export const RegisterPage = () => {
 
     try {
       
-      setLoading(true)
+      setIsLoading(true)
       setError(null)
   
       const userRes = await registerUser(email, password)
@@ -110,7 +110,7 @@ export const RegisterPage = () => {
         setError(error.message)
         console.log(error.message)
     } finally {
-        setLoading(false)
+        setIsLoading(false)
     }
 
     setError(""); // Сбрасываем ошибку после успешной регистрации
@@ -157,7 +157,7 @@ export const RegisterPage = () => {
               )}
               {errorDiv}
             </S.PossibleError>
-            <S.ModalBtnSignupEnt disabled={loading}>
+            <S.ModalBtnSignupEnt disabled={isLoading}>
               Зарегистрироваться
             </S.ModalBtnSignupEnt>
             {/* </Link> */}

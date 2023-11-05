@@ -3,28 +3,39 @@ import { useOutletContext } from 'react-router-dom'
 export const FavoritesPage = () => {
   const [
     tracks,
-    //setMyTracks,
+    setTracks,
+    location,
+    likeInd,
+    setLikeInd,
     setCurrentTrack,
     currentTrack,
     isPlaying,
     setIsPlaying,
     setTrackIndex,
+    trackIndex,
     tracksError,
     isLoading,
-    myTracks,
-    setMyTracks
+    mySongs,
+    setMySongs
   ] = useOutletContext()
-  console.log(setMyTracks, tracksError, isLoading,tracks)
+  console.log(setMySongs, tracksError, isLoading,tracks)
   return (
     <>
-      {currentTrack && myTracks ? (
+      {currentTrack && mySongs ? (
         <Tracklist
-          tracks={myTracks}
+          tracks={mySongs}
+          setTracks={setTracks}
+          mySongs={mySongs}
+          setMySongs={setMySongs}
+          location={location}
           setCurrentTrack={setCurrentTrack}
           currentTrack={currentTrack}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           setTrackIndex={setTrackIndex}
+          trackIndex={trackIndex}
+          likeInd={likeInd}
+          setLikeInd={setLikeInd}
         />
       ) : (
         <div style={{ textAlign: 'start' }}>В этом плейлисте нет треков</div>

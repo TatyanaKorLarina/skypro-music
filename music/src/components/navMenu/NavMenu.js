@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React from 'react'
+//import ReactDOM from 'react-dom'
 import * as S from './NavMenu.styles'
 import { useNavigate } from 'react-router-dom'
 const { useState } = React
@@ -29,7 +30,7 @@ function NavMenu() {
 
   return (<S.MainNav>
   <S.NavLogo>
-    <S.LogoImage src="img/logo.png" alt="logo" />
+    <S.LogoImage src="/img/logo.png" alt="logo" />
   </S.NavLogo>
   <S.NavBurger onClick={toggleMenu}>
     <S.BurgerLine />

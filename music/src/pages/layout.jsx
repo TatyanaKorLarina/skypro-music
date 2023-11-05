@@ -14,13 +14,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentAudio, setTracklist }  from '../store/tracksSlice'
 import * as S from '../App.styles'
 import { Outlet, useLocation } from 'react-router-dom'
-
+//import { Link } from 'react-router-dom'
 export const Layout = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [myTracks, setMyTracks] = useState([])
+  const [mySongs, setMySongs] = useState([])
+  const [likeInd, setLikeInd] = useState([])
   const navigate = useNavigate()
   const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
   console.log (isLogIn)
@@ -41,23 +42,61 @@ export const Layout = () => {
         setTracksError(error.message)
         setIsLoading(false)
       })
-      getMySongs(localStorage.user)
-      .then((myTracks) => {
-        setMyTracks(myTracks)
-        console.log(myTracks)
+    getMySongs(localStorage.user)
+      .then((mySongs) => {
+        setMySongs(mySongs)
+        getLikeInd()
+        //console.log(mySongs)
       })
       .then(() => setIsLoading(false))
       .catch((error) => {
+        if (
+          error.message === 'Данный токен недействителен для любого типа токена'
+        ) {
+          //navigate('/login', { replace: true })
+          return
+        }
         setTracksError(error.message)
         setIsLoading(false)
       })
   }, [])
+
+  const getLikeInd = () => {
+    for (let mySong of mySongs) {
+      setLikeInd((likeInd) => [...likeInd, mySong.id])
+    }
+    let array = []
+    let count = 0
+    let start = false
+    for (let j = 0; j < likeInd.length; j++) {
+      for (let k = 0; k < array.length; k++) {
+        if (likeInd[j] == array[k]) {
+          start = true
+        }
+      }
+      count++
+      if (count == 1 && start == false) {
+        array.push(likeInd[j])
+      }
+      start = false
+      count = 0
+      setLikeInd(array)
+    }
+  }
+
+  useEffect(() => {
+    getLikeInd()
+  }, [mySongs])
+
+
+
+
   //getTracks().then((tracks) => console.log(tracks));
   const currentAudio = useSelector((state) => state.tracks.track)
   const [trackIndex, setTrackIndex] = useState(null)
   const [currentTrack, setCurrentTrack] = useState(currentAudio)
   const addSong = () => dispatch(setCurrentAudio(currentTrack))
-  console.log(setCurrentAudio)
+  //console.log(setCurrentAudio)
   const dispatch = useDispatch()
   //const setCurrentTrack = () => dispatch(setCurrentAudio(currentAudio))
   const addTrackList = () => dispatch(setTracklist(tracks))
@@ -78,7 +117,7 @@ export const Layout = () => {
                 <S.MainCenterblock>
                   <S.CenterblockSearch>
                     <S.SearchSvg>
-                      <use xlinkHref="img/icon/sprite.svg#icon-search" />
+                      <use xlinkHref="/img/icon/sprite.svg#icon-search" />
                     </S.SearchSvg>
                     <S.SearchText
                       type="search"
@@ -86,15 +125,15 @@ export const Layout = () => {
                       name="search"
                     />
                     <S.SidebarPersonal>
-                    <S.SidebarPersonalName>{authUser.email}</S.SidebarPersonalName>
+                    <S.SidebarPersonalName>{authUser}</S.SidebarPersonalName>
                       <S.SidebarIcon>
                       <S.Logout onClick={logout} alt="logout">
-                          <use xlinkHref="img/icon/sprite.svg#logout" />
+                          <use xlinkHref="/img/icon/sprite.svg#logout" />
                         </S.Logout>
                       </S.SidebarIcon>
                     </S.SidebarPersonal>
                   </S.CenterblockSearch>
-                  <S.CenterblockH2>Треки</S.CenterblockH2>
+                  <S.CenterblockH2></S.CenterblockH2>
                   <S.CenterblockH2>
                 {location.pathname === '/' ? 'Треки' : 'Мои треки'}
               </S.CenterblockH2>
@@ -106,47 +145,57 @@ export const Layout = () => {
                       <S.PlaylistTitleCol3>АЛЬБОМ</S.PlaylistTitleCol3>
                       <S.PlaylistTitleCol4>
                         <S.PlaylistTitleSvg alt="time">
-                          <use xlinkHref="img/icon/sprite.svg#icon-watch" />
+                          <use xlinkHref="/img/icon/sprite.svg#icon-watch" />
                         </S.PlaylistTitleSvg>
                       </S.PlaylistTitleCol4>
                     </S.ContentTitle>
                     <Outlet
                   context={[
                     tracks,
+                    setTracks,
                     setCurrentTrack,
                     currentTrack,
                     isPlaying,
                     setIsPlaying,
                     setTrackIndex,
+                    trackIndex,
                     tracksError,
                     isLoading,
-                    myTracks,
-                    setMyTracks,
+                    mySongs,
+                    setMySongs,
+                    location,
+                    likeInd,
+                    setLikeInd,
                   ]}
                 />
                   </S.CenterblockContent>
                 </S.MainCenterblock>
-                <p style={{ color: 'red', position: 'relative' }}>
-                      {tracksError}
-                    </p>
+                
                     {isLoading && <SidebarSkeleton />}
-                    {isLoading && <AudioPlayerSkeleton />}
+                    
                     {!isLoading && 
                     <Sidebar />}
                     {!isLoading && currentTrack && (
                       <Tracklist 
-                        tracks={tracks} 
-                        currentTrack={currentTrack}
-                        //setCurrentTrack={setCurrentTrack}
-                        isPlaying={isPlaying}
-                        //setIsPlaying={setIsPlaying}
-                        setTrackIndex={setTrackIndex} 
-                        myTracks={myTracks}
-                        setMyTracks={setMyTracks}
+                      tracks={tracks} 
+                      setTracks={setTracks}
+                      mySongs={mySongs}
+                      setMySongs={setMySongs}
+                      trackIndex={trackIndex}
+                      location={location}
+                      likeInd={likeInd}
+                      setLikeInd={setLikeInd}
+                      setCurrentTrack={setCurrentTrack}
+                      currentTrack={currentTrack}
+                      isPlaying={isPlaying}
+                      setIsPlaying={setIsPlaying}
+                      setTrackIndex={setTrackIndex}
+                      tracksError={tracksError}
                       />
                     )}
               </S.Main>
-              
+              {isLoading && <AudioPlayerSkeleton />}
+
               {currentTrack &&  (
                 <AudioPlayer 
                   currentTrack={currentTrack} isPlaying={isPlaying}
@@ -155,6 +204,8 @@ export const Layout = () => {
                   setCurrentTrack={setCurrentTrack}
                   trackIndex={trackIndex}
                   setTrackIndex={setTrackIndex} 
+                  mySongs={mySongs}
+                  location={location}
                 />
               )}
               <footer className="footer" />

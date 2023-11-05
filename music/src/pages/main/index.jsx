@@ -19,6 +19,7 @@ import { useOutletContext } from 'react-router-dom'
 export const MainPage = () => {
   const [
     tracks,
+    setTracks,
     setCurrentTrack,
     currentTrack,
     isPlaying,
@@ -26,6 +27,12 @@ export const MainPage = () => {
     setTrackIndex,
     tracksError,
     isLoading,
+    trackIndex,
+    mySongs,
+    setMySongs,
+    location,
+    likeInd,
+    setLikeInd,
 
   ] = useOutletContext()
 
@@ -36,13 +43,20 @@ export const MainPage = () => {
       {!isLoading && currentTrack && (
         <Tracklist
           tracks={tracks} 
+          setTracks={setTracks}
+          mySongs={mySongs}
+          setMySongs={setMySongs}
+          trackIndex={trackIndex}
+          location={location}
+          likeInd={likeInd}
+          setLikeInd={setLikeInd}
           setCurrentTrack={setCurrentTrack}
           currentTrack={currentTrack}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           setTrackIndex={setTrackIndex}
           tracksError={tracksError}
-          isLoading={isLoading}
+          //isLoading={isLoading}
           />
       )}
     </>
