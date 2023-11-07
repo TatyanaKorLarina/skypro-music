@@ -10,7 +10,7 @@ export const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
@@ -22,44 +22,45 @@ export const LoginPage = () => {
     navigate('/', { replace: true })
   }
   console.log (setUser)
-  const handleSubmit = async (event) => {
-    try {
-      event.preventDefault()
-      setLoading(true)
-      setError(null)
-  
-      const userRes = await loginUser(email, password)
-      const tokenRes = await getToken(email, password)
-
-      const userData = {...userRes, ...tokenRes}
-      console.log (userData)
-
-      setAuthUser(userData)
-      localStorage.setItem("user", JSON.stringify(userData))
-
-      setIsLogIn(true)
-      navigate('/', { replace: true})
-    } catch (error) {
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setIsLoading(true)
+    setError(null)
+    console.log('submited form')
+    loginUser(email, password).catch((error) => {
+      setError(error.message)
+      console.log(error.message)
+    })
+    getToken(email, password)
+      .then((res) => {
+        setUser('user', res.access)
+        localStorage.setItem('refreshed', res.refresh)
+        setIsLogIn(true)
+        // setAuthUser({ username: email })
+        setAuthUser(email)
+        setIsLoading(false)
+      })
+      .catch((error) => {
         setError(error.message)
+        setIsLoading(false)
         console.log(error.message)
-    } finally {
-        setLoading(false)
-    }
-    
-    
-    
+      })
   }
+    
+    
+  
 
 
   const errorDiv = error ? <div className="error">{error}</div> : ''
   return (
+    <>
 
     <S.Wrapper>
       <S.ContainerEnter>
         <S.ModalBlock>
         <S.ModalFormLogin onSubmit={handleSubmit}>
           <S.ModalLogo>
-              <img src="../img/logo_modal.png" alt="logo" />
+              <img src="/../img/logo_modal.png" alt="logo" />
             </S.ModalLogo>
             <S.ModalInputLogin
               type="text"
@@ -76,7 +77,7 @@ export const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <S.PossibleError>{errorDiv}</S.PossibleError>
-            <S.ModalBtnEnter disabled={loading}>
+            <S.ModalBtnEnter disabled={isLoading}>
               Войти
             </S.ModalBtnEnter>
             <Link to="/register">
@@ -86,5 +87,6 @@ export const LoginPage = () => {
         </S.ModalBlock>
       </S.ContainerEnter>
     </S.Wrapper>
-  )
-}
+   </> )
+  } 
+

@@ -1,20 +1,68 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import AudioPlayer from '../../components/audioPlayer/AudioPlayer';
-import NavMenu from '../../components/navMenu/NavMenu';
+//import { useState, useEffect } from 'react'
+//import { useNavigate } from 'react-router-dom'
+import '../../components/audioPlayer/AudioPlayer';
+//import NavMenu from '../../components/navMenu/NavMenu';
 import Tracklist from '../../components/tracklist/Tracklist';
-import Sidebar from '../../components/sidebar/Sidebar';
-import { useAuth } from '../../Contexts/AuthContext'
-import { getTracks } from '../../api';
+//import Sidebar from '../../components/sidebar/Sidebar';
+//import { useAuth } from '../../Contexts/AuthContext'
+//import { getTracks } from '../../api';
 import TracklistSkeleton from '../../components/tracklistSkeleton/TracklistSkeleton'
 //import AudioPlayerSkeleton from '../../components/audioPlayerSkeleton/AudioPlayerSkeleton'
-import SidebarSkeleton from '../../components/sidebarSkeleton/SidebarSkeleton'
-import Filter from '../../components/filter/Filter';
-import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentAudio, setTracklist }  from '../../store/tracksSlice'
-import * as S from '../../App.styles'
+//import SidebarSkeleton from '../../components/sidebarSkeleton/SidebarSkeleton'
+//import Filter from '../../components/filter/Filter';
+//import { useSelector, useDispatch } from 'react-redux'
+//import { setCurrentAudio, setTracklist }  from '../../store/tracksSlice'
+//import * as S from '../../App.styles'
+//import React from 'react';
+import { useOutletContext } from 'react-router-dom'
 
-export const MainPage = ({ categories }) => {
+export const MainPage = () => {
+  const [
+    tracks,
+    setTracks,
+    setCurrentTrack,
+    //currentTrack,
+    isPlaying,
+    setIsPlaying,
+    setTrackIndex,
+    tracksError,
+    isLoading,
+    trackIndex,
+    mySongs,
+    setMySongs,
+    location,
+    likeInd,
+    setLikeInd,
+    currentAudio
+  ] = useOutletContext()
+
+  return(
+    <>
+      <p style={{ color: 'red', position: 'relative' }}>{tracksError}</p>
+      {isLoading && <TracklistSkeleton />}
+      {!isLoading && currentAudio && (
+        <Tracklist
+          tracks={tracks} 
+          setTracks={setTracks}
+          mySongs={mySongs}
+          setMySongs={setMySongs}
+          trackIndex={trackIndex}
+          location={location}
+          likeInd={likeInd}
+          setLikeInd={setLikeInd}
+          setCurrentTrack={setCurrentTrack}
+          //currentTrack={currentTrack}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          setTrackIndex={setTrackIndex}
+          tracksError={tracksError}
+          //isLoading={isLoading}
+          />
+      )}
+    </>
+  )
+}
+/*export const MainPage = ({ categories }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
@@ -134,7 +182,9 @@ export const MainPage = ({ categories }) => {
         
       
     )
-  }
+  } */
+
+
   
   
   
