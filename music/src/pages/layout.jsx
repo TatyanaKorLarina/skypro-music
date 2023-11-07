@@ -5,7 +5,7 @@ import NavMenu from '../components/navMenu/NavMenu';
 import Tracklist from '../components/tracklist/Tracklist';
 import Sidebar from '../components/sidebar/Sidebar';
 import { useAuth } from '../Contexts/AuthContext'
-import { getTracks } from '../api';
+import { getTracks, getMySongs } from '../api';
 import TracklistSkeleton from '../components/tracklistSkeleton/TracklistSkeleton'
 //import AudioPlayerSkeleton from '../../components/audioPlayerSkeleton/AudioPlayerSkeleton'
 import SidebarSkeleton from '../components/sidebarSkeleton/SidebarSkeleton'
@@ -20,6 +20,8 @@ export const Layout = ({ categories }) => {
   const [tracks, setTracks] = useState([]);
   const [tracksError, setTracksError] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [mySongs, setMySongs] = useState([])
+  const [likeInd, setLikeInd] = useState([])
   const navigate = useNavigate()
   const { authUser, setAuthUser, isLogIn, setIsLogIn } = useAuth()
   console.log (isLogIn)
@@ -40,7 +42,51 @@ export const Layout = ({ categories }) => {
         setTracksError(error.message)
         setIsLoading(false)
       })
+    getMySongs(localStorage.user)
+      .then((mySongs) => {
+        setMySongs(mySongs)
+        getLikeInd()
+        //console.log(mySongs)
+      })
+      .then(() => setIsLoading(false))
+      .catch((error) => {
+        if (
+          error.message === 'Данный токен недействителен для любого типа токена'
+        ) {
+          navigate('/login', { replace: true })
+          return
+        }
+        setTracksError(error.message)
+        setIsLoading(false)
+      })
   }, [])
+
+  const getLikeInd = () => {
+    for (let mySong of mySongs) {
+      setLikeInd((likeInd) => [...likeInd, mySong.id])
+    }
+    let array = []
+    let count = 0
+    let start = false
+    for (let j = 0; j < likeInd.length; j++) {
+      for (let k = 0; k < array.length; k++) {
+        if (likeInd[j] == array[k]) {
+          start = true
+        }
+      }
+      count++
+      if (count == 1 && start == false) {
+        array.push(likeInd[j])
+      }
+      start = false
+      count = 0
+      setLikeInd(array)
+    }
+  }
+
+  useEffect(() => {
+    getLikeInd()
+  }, [mySongs])
   //getTracks().then((tracks) => console.log(tracks));
   const currentAudio = useSelector((state) => state.tracks.track)
   const [trackIndex, setTrackIndex] = useState(null)
