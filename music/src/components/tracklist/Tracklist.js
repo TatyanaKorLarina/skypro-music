@@ -14,7 +14,7 @@ function Tracklist({
   setTracks,
   mySongs,
   setMySongs,
-  currentTrack, 
+  //currentTrack, 
   //setCurrentTrack,
   //trackIndex,
   //location,
@@ -131,7 +131,7 @@ const Disliking = async (id) => {
           }} >
 
 
-                {currentTrack.id && setCurrentTrack.id === track.id ? (
+                {currentAudio && currentAudio.id === track.id ? (
                    
                      
                    <S.PlayingDot

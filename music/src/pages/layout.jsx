@@ -53,7 +53,7 @@ export const Layout = () => {
         if (
           error.message === 'Данный токен недействителен для любого типа токена'
         ) {
-          //navigate('/login', { replace: true })
+          navigate('/login', { replace: true })
           return
         }
         setTracksError(error.message)
@@ -88,23 +88,26 @@ export const Layout = () => {
     getLikeInd()
   }, [mySongs])
 
-
+  const dispatch = useDispatch();
+  const currentAudio = useSelector((state) => state.tracks.track)
+  const setCurrentTrack = dispatch(setCurrentAudio(currentAudio));
+  //let isPlaying = useSelector((state) => state.tracks.isPlaying);
 
 
   //getTracks().then((tracks) => console.log(tracks));
-  const currentAudio = useSelector((state) => state.tracks.track)
+  //const currentAudio = useSelector((state) => state.tracks.track)
   const [trackIndex, setTrackIndex] = useState(null)
-  const [currentTrack, setCurrentTrack] = useState(currentAudio)
-  const addSong = () => dispatch(setCurrentAudio(currentTrack))
+  //const [currentTrack, setCurrentTrack] = useState(currentAudio)
+  const addSong = () => dispatch(setCurrentAudio(currentAudio))
   //console.log(setCurrentAudio)
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
   //const setCurrentTrack = () => dispatch(setCurrentAudio(currentAudio))
   const addTrackList = () => dispatch(setTracklist(tracks))
   addSong()
   //setCurrentTrack()
   useEffect(() => {
     addTrackList()
-  }, [currentTrack])
+  }, [currentAudio])
   const location = useLocation()
   return (
       <>
@@ -154,7 +157,7 @@ export const Layout = () => {
                     tracks,
                     setTracks,
                     setCurrentTrack,
-                    currentTrack,
+                    //currentTrack,
                     isPlaying,
                     setIsPlaying,
                     setTrackIndex,
@@ -175,7 +178,7 @@ export const Layout = () => {
                     
                     {!isLoading && 
                     <Sidebar />}
-                    {!isLoading && currentTrack && (
+                    {!isLoading && currentAudio && (
                       <Tracklist 
                       tracks={tracks} 
                       setTracks={setTracks}
@@ -186,7 +189,7 @@ export const Layout = () => {
                       likeInd={likeInd}
                       setLikeInd={setLikeInd}
                       setCurrentTrack={setCurrentTrack}
-                      currentTrack={currentTrack}
+                      //currentTrack={currentTrack}
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
                       setTrackIndex={setTrackIndex}
@@ -196,9 +199,9 @@ export const Layout = () => {
               </S.Main>
               {isLoading && <AudioPlayerSkeleton />}
 
-              {currentTrack &&  (
+              {currentAudio &&  (
                 <AudioPlayer 
-                  currentTrack={currentTrack} isPlaying={isPlaying}
+                  //currentTrack={currentTrack} isPlaying={isPlaying}
                   setIsPlaying={setIsPlaying}
                   tracks={tracks}
                   setCurrentTrack={setCurrentTrack}

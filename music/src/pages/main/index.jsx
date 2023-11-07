@@ -21,7 +21,7 @@ export const MainPage = () => {
     tracks,
     setTracks,
     setCurrentTrack,
-    currentTrack,
+    //currentTrack,
     isPlaying,
     setIsPlaying,
     setTrackIndex,
@@ -33,14 +33,14 @@ export const MainPage = () => {
     location,
     likeInd,
     setLikeInd,
-
+    currentAudio
   ] = useOutletContext()
 
   return(
     <>
       <p style={{ color: 'red', position: 'relative' }}>{tracksError}</p>
       {isLoading && <TracklistSkeleton />}
-      {!isLoading && currentTrack && (
+      {!isLoading && currentAudio && (
         <Tracklist
           tracks={tracks} 
           setTracks={setTracks}
@@ -51,7 +51,7 @@ export const MainPage = () => {
           likeInd={likeInd}
           setLikeInd={setLikeInd}
           setCurrentTrack={setCurrentTrack}
-          currentTrack={currentTrack}
+          //currentTrack={currentTrack}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           setTrackIndex={setTrackIndex}
